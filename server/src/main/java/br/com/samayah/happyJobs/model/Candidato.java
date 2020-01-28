@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import br.com.samayah.model.Users;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
