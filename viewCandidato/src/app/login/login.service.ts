@@ -18,6 +18,8 @@ export class LoginService {
 
   private duranteTrs = false;
 
+  private usuarioLogado: string;
+
   constructor(private http: HttpClient) { }
 
   public logar(user: User): Observable < any > {
@@ -30,11 +32,19 @@ export class LoginService {
          .pipe(
             tap( response => {
               this.token = response.headers.get('Authorization');
+              this.usuarioLogado = user.username;
               console.log(this.token);
               return response;
             }));
   }
 
+  public getToken(): string {
+    return this.token;
+  }
+
+  public getUsuarioLogado(): string {
+    return this.usuarioLogado;
+  }
 
   public saveUser(user: User): Observable<any> {
 
@@ -55,10 +65,6 @@ export class LoginService {
                 }));
     }
 
-  }
-
-  public getToken(): string {
-    return this.token;
   }
 
 }

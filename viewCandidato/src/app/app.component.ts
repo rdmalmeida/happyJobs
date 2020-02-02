@@ -18,6 +18,16 @@ export class AppComponent implements OnInit{
       icon: 'home'
     },
     {
+      title: 'Dados Pessoais',
+      url: '/candidato',
+      icon: 'list'
+    },
+    {
+      title: 'Currículo',
+      url: '/cv',
+      icon: 'list'
+    },
+    {
       title: 'List',
       url: '/list',
       icon: 'list'

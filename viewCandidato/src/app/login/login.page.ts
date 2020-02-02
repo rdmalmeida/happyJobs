@@ -3,6 +3,8 @@ import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
 import {  HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TimeoutError } from 'rxjs';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -13,33 +15,48 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
 
-  public user: User = {username: '', password: '', enabled: true, email: '', dataCadastro: new Date(), confirm: ''};
+  public user: User = {username: '', password: '', enabled: true, dataCadastro: null, confirm: ''};
 
-  public newUser: User = {username: '', password: '', enabled: true, email: '', dataCadastro: new Date(), confirm: ''};
-
-  constructor(private router: Router, private loginService: LoginService) { }
-
-  public showRegisterForm = false;
+  public newUser: User = {username: '', password: '', enabled: true, dataCadastro: null, confirm: ''};
 
   public errorMsg = '';
   public errorMsg2 = '';
 
+  validations_form: FormGroup;
+
+  constructor(private router: Router, 
+    private formBuilder: FormBuilder,
+    private loginService: LoginService) {
+   
+   }
+
+  public showRegisterForm = false;
 
 
   ngOnInit() {
+
+    this.validations_form  = this.formBuilder.group({
+      username: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   logar() {
-
+    
+/*
     this.loginService.logar(this.user).subscribe((header) => {
 
       this.router.navigate(['home']);
 
-    }, (a) => this.handleError(a, 1));
+    }, (a) => this._handleError(a, 1));*/
   }
 
   saveUser(form: HTMLFormElement, btn: HTMLButtonElement) {
     btn.disabled = true;
+    this.newUser.dataCadastro = new Date();
 
     this.loginService.saveUser(this.newUser).subscribe( (resp) => {
         this.errorMsg2 = 'Usuário cadastrado com sucesso!';
@@ -47,31 +64,36 @@ export class LoginPage implements OnInit {
         btn.disabled = false;
     }, (out) => {
       // console.log(out);
-      this.handleError(out, 2);
+      this._handleError(out, 2);
       btn.disabled = false;
     });
   }
 
-  handleError(a, form) {
+  _handleError(error, form) {
 
-      let mensagem;
-      if (a instanceof HttpErrorResponse) {
-        if (a.status === 0) {
+    let mensagem;  
+    if(error instanceof TimeoutError){
+        mensagem = 'Serviço indisponível, tente novamente mais tarde.';
+    } else {
+      
+      if (error instanceof HttpErrorResponse) {
+        if (error.status === 0) {
           mensagem = 'Serviço indisponível, tente novamente mais tarde.';
         }
-        if (a.status === 403) {
+        if (error.status === 403) {
           mensagem = 'Login ou senha inválidos!';
         }
-        if (a.status === 406) {
-          mensagem = a.error.mensagem;
+        if (error.status === 406) {
+          mensagem = error.error.mensagem;
         }
       }
+    }
 
-      if (form === 1) {
-        this.errorMsg = mensagem;
-      } else {
-        this.errorMsg2 = mensagem;
-      }
+    if (form === 1) {
+      this.errorMsg = mensagem;
+    } else {
+      this.errorMsg2 = mensagem;
+    }
   }
 
   showCadastro() {
