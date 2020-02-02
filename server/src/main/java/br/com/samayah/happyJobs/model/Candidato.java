@@ -3,10 +3,7 @@ package br.com.samayah.happyJobs.model;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-import br.com.samayah.model.Users;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,16 +13,25 @@ import lombok.NoArgsConstructor;
 public class Candidato {
 	
 	@Id
-	private String cpf;
-	
-	private String nome;
-	
-	@OneToOne
-	@JoinColumn(name = "username")
-	private Users user;
-	
+	private String username;
+
+	/*
+	 * @OneToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "username", unique = true)
+	 */
 	@Embedded
-	private Curriculum cv;
+	private DadosPessoais dadosPessoais;
+	
+	/*
+	 * @OneToOne
+	 * 
+	 * @JoinColumn(name = "username") private Users user;
+	 */
+	
+	/*
+	 * @Embedded private Curriculum cv;
+	 */
 		
 
 }

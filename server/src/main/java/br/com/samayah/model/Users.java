@@ -16,24 +16,25 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 public class Users {
- 
-   	@Id
+
+	@Id
 	@NonNull
-    private String username;
-   	 
+	private String username;
+
 	@NonNull
-    private String password;
-		
+	private String password;
+
 	@NonNull
-    private Boolean enabled;
-	
+	private Boolean enabled;
+
 	@NonNull
 	private Date dataCadastro;
+
 	
-	@OneToOne(mappedBy="user", fetch = FetchType.LAZY)
-	private Candidato candidato;
-	
-	
-	
+	/*
+	 * @OneToOne(mappedBy="user", fetch = FetchType.LAZY) private Candidato
+	 * candidato;
+	 */
+
 
 }

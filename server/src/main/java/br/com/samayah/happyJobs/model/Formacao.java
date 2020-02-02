@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+//@Entity
 @Data
 @NoArgsConstructor
 public class Formacao {
@@ -28,7 +28,7 @@ public class Formacao {
 	
 	private String descricao;
 	
-	@Embeddable
+	//@Embeddable
 	@Data
 	private class FormacaoPK implements Serializable {
 

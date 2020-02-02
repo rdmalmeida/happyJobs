@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Embeddable
+
 @Data
 @NoArgsConstructor
 public class Curriculum {
