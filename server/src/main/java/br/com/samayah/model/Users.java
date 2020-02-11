@@ -3,11 +3,9 @@ package br.com.samayah.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
-import br.com.samayah.happyJobs.model.Candidato;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,6 +21,10 @@ public class Users {
 
 	@NonNull
 	private String password;
+	
+	@NonNull
+	@Transient
+	private String confirm;
 
 	@NonNull
 	private Boolean enabled;

@@ -11,9 +11,9 @@
 
 <ion-content>
 
-  <form novalidate>
   
-        <!--form  #form (ngSubmit)="save(form, myBtn)"-->
+  
+        <form  #form (ngSubmit)="save(form, myBtn)" [formGroup]="validations_form">
 
           <ion-grid>
             <ion-row class="ion-justify-content-center">
@@ -30,34 +30,61 @@
                   <ion-item>
                    foto
                   </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.nomeCompleto.valid  && (validations_form.controls.nomeCompleto.dirty) && submetido">
+                    <div style="color: red;">Preencha seu nome completo.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Nome:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.nomeCompleto" placeholder="Nome Completo"  name="nomeCompleto" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Nascimento:&nbsp;&nbsp;</ion-label>
-                    <ion-datetime [(ngModel)]="candidato.dadosPessoais.nascimento" displayFormat="DD/MM/YYYY" name="nascimento" doneText="Ok" cancelText="Cancelar" required></ion-datetime>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>RG:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.rg" type="text" placeholder="RG" name="rg" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>CPF:&nbsp;&nbsp;</ion-label>
-                    <ion-input type="text" [(ngModel)]="candidato.dadosPessoais.cpf" name="cpf"  placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Nacionalidade:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.nacionalidade" type="text" placeholder="Nacionalidade" name="nacionalidade" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Naturalidade:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.naturalidade" type="text" placeholder="Naturalidade" name="naturalidade" required></ion-input>
+                    <ion-input formControlName="nomeCompleto" placeholder="Nome Completo"  name="nomeCompleto" required></ion-input>
                   </ion-item>
 
+                  <ion-item *ngIf="!validations_form.controls.nascimento.valid  && (validations_form.controls.nascimento.dirty) && submetido">
+                    <div style="color: red;">Preencha sua data de nascimento.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Nascimento:&nbsp;&nbsp;</ion-label>
+                    <ion-datetime formControlName="nascimento" displayFormat="DD/MM/YYYY" name="nascimento" doneText="Ok" cancelText="Cancelar" required></ion-datetime>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.rg.valid  && (validations_form.controls.rg.dirty) && submetido">
+                    <div style="color: red;">Preencha seu RG.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>RG:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="rg" type="text" placeholder="RG" name="rg" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cpf.valid  && (validations_form.controls.cpf.dirty) && submetido">
+                    <div style="color: red;">Preencha seu CPF.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>CPF:&nbsp;&nbsp;</ion-label>
+                    <ion-input type="text" formControlName="cpf" name="cpf"  placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.nacionalidade.valid  && (validations_form.controls.nacionalidade.dirty) && submetido">
+                    <div style="color: red;">Preencha sua nacionalidade.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Nacionalidade:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="nacionalidade" type="text" placeholder="Nacionalidade" name="nacionalidade" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.naturalidade.valid  && (validations_form.controls.naturalidade.dirty) && submetido">
+                    <div style="color: red;">Preencha sua naturalidade.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Naturalidade:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="naturalidade" type="text" placeholder="Naturalidade" name="naturalidade" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.estadoCivil.valid  && (validations_form.controls.estadoCivil.dirty) && submetido">
+                    <div style="color: red;">Preencha seu estado civil.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Estado Civil:&nbsp;&nbsp;</ion-label>
-                    <ion-select placeholder="Estado Civil" [(ngModel)]="candidato.dadosPessoais.estadoCivil" name="estadoCivil" doneText="Ok" cancelText="Cancelar" required>
+                    <ion-select placeholder="Estado Civil" formControlName="estadoCivil" name="estadoCivil" doneText="Ok" cancelText="Cancelar" required>
                       <ion-select-option value="S">Solteiro(a)</ion-select-option>
                       <ion-select-option value="C">Casado(a)</ion-select-option>
                       <ion-select-option value="D">Divorciado(a)</ion-select-option>
@@ -66,9 +93,13 @@
                     </ion-select>
                   </ion-item>
                   
+
+                  <ion-item *ngIf="!validations_form.controls.genero.valid  && (validations_form.controls.genero.dirty) && submetido">
+                    <div style="color: red;">Preencha seu gênero</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Gênero:&nbsp;&nbsp;</ion-label>
-                    <ion-select placeholder="Gênero" [(ngModel)]="candidato.dadosPessoais.genero" name="genero" doneText="Ok" cancelText="Cancelar" required>
+                    <ion-select placeholder="Gênero" formControlName="genero" name="genero" doneText="Ok" cancelText="Cancelar" required>
                       <ion-select-option value="F">Feminino</ion-select-option>
                       <ion-select-option value="M">Masculino</ion-select-option>
                     </ion-select>
@@ -78,25 +109,42 @@
 
                 <ion-card class="welcome-card">
 
+
+                  <ion-item *ngIf="!validations_form.controls.logradouro.valid  && (validations_form.controls.logradouro.dirty) && submetido">
+                    <div style="color: red;">Preencha seu logradouro.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Logradouro:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.logradouro" type="text" placeholder="Logradouro" name="logradouro" required></ion-input>
+                    <ion-input formControlName="logradouro" type="text" placeholder="Logradouro" name="logradouro" required></ion-input>
                   </ion-item>
+                  
                   <ion-item>
                     <ion-label>Complemento:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.complemento" type="text" placeholder="Complemento" name="complemento"></ion-input>
+                    <ion-input formControlName="complemento" type="text" placeholder="Complemento" name="complemento"></ion-input>
                   </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.bairro.valid  && (validations_form.controls.bairro.dirty) && submetido">
+                    <div style="color: red;">Preencha seu bairro</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Bairro:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.bairro" type="text" placeholder="Bairro" name="bairro" required></ion-input>
+                    <ion-input formControlName="bairro" type="text" placeholder="Bairro" name="bairro" required></ion-input>
                   </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cidade.valid  && (validations_form.controls.cidade.dirty) && submetido">
+                    <div style="color: red;">Preencha sua cidade.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Cidade:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.cidade" type="text" placeholder="Cidade" name="cidade" required></ion-input>
+                    <ion-input formControlName="cidade" type="text" placeholder="Cidade" name="cidade" required></ion-input>
                   </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.uf.valid  && (validations_form.controls.uf.dirty) && submetido">
+                    <div style="color: red;">Preencha sua UF de origem.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>UF:&nbsp;&nbsp;</ion-label>
-                    <ion-select [(ngModel)]="candidato.dadosPessoais.uf" type="text" placeholder="Uf" name="uf" [interfaceOptions]="customPopoverOptions" interface="popover" required>
+                    <ion-select formControlName="uf" type="text" placeholder="Uf" name="uf" [interfaceOptions]="customPopoverOptions" interface="popover" required>
                       <ion-select-option value="AC">Acre</ion-select-option>
                       <ion-select-option value="AL">Alagoas</ion-select-option>
                       <ion-select-option value="AP">Amapá</ion-select-option>
@@ -124,9 +172,13 @@
                       <ion-select-option value="TO">Tocantins</ion-select-option>
                     </ion-select>
                   </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cep.valid  && (validations_form.controls.cep.dirty) && submetido">
+                    <div style="color: red;">Preencha seu CEP.</div>
+                  </ion-item>                            
                   <ion-item>
                     <ion-label>Cep:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.cep" type="text" placeholder="Cep" name="cep" required></ion-input>
+                    <ion-input formControlName="cep" type="text" placeholder="Cep" name="cep" required></ion-input>
                   </ion-item>
                   
                 </ion-card> <br>
@@ -135,15 +187,15 @@
 
                   <ion-item>
                     <ion-label>Link do Facebook:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.linkFace" type="text" placeholder="Link do Facebook" name="linkFace"></ion-input>
+                    <ion-input formControlName="linkFace" type="text" placeholder="Link do Facebook" name="linkFace"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>LinkedIn:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.linkedIn" type="text" placeholder="LinkedIN" name="linkedIn"></ion-input>
+                    <ion-input formControlName="linkedIn" type="text" placeholder="LinkedIN" name="linkedIn"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Instagram:&nbsp;&nbsp;</ion-label>
-                    <ion-input [(ngModel)]="candidato.dadosPessoais.instagram" type="text" placeholder="Instagram" name="instagram"></ion-input>
+                    <ion-input formControlName="instagram" type="text" placeholder="Instagram" name="instagram"></ion-input>
                   </ion-item>
 
                 </ion-card> <br>
@@ -152,27 +204,27 @@
 
                   <ion-item>
                     <ion-label>Possui Filhos?</ion-label>
-                    <ion-checkbox color="primary" [(ngModel)]="candidato.dadosPessoais.possuiFilhos" name="possuiFilhos"></ion-checkbox>
+                    <ion-checkbox color="primary" formControlName="possuiFilhos" name="possuiFilhos"></ion-checkbox>
                   </ion-item>
 
                   <ion-item>
                     <ion-label>Possui Habilitação?</ion-label>
-                    <ion-checkbox color="primary" [(ngModel)]="candidato.dadosPessoais.possuiHabilitacao" name="possuiHabilitacao"></ion-checkbox>
+                    <ion-checkbox color="primary" formControlName="possuiHabilitacao" name="possuiHabilitacao"></ion-checkbox>
                   </ion-item>
 
                   <ion-item>
                     <ion-label>Possui Veículo?</ion-label>
-                    <ion-checkbox color="primary" [(ngModel)]="candidato.dadosPessoais.possuiVeiculo" name="possuiVeiculo"></ion-checkbox>
+                    <ion-checkbox color="primary" formControlName="possuiVeiculo" name="possuiVeiculo"></ion-checkbox>
                   </ion-item>
 
                   <ion-item>
                     <ion-label>Possui Necessidades Especiais?</ion-label>
-                    <ion-checkbox color="primary" [(ngModel)]="candidato.dadosPessoais.possuiNecessidadesEspeciais" name="possuiNecessidadesEspeciais"></ion-checkbox>
+                    <ion-checkbox color="primary" formControlName="possuiNecessidadesEspeciais" name="possuiNecessidadesEspeciais"></ion-checkbox>
                   </ion-item>
 
                   <ion-item>
                     <ion-label>Disponível para mudar de cidade?</ion-label>
-                    <ion-checkbox color="primary" [(ngModel)]="candidato.dadosPessoais.disponibilidadeMudar" name="disponibilidadeMudar"></ion-checkbox>
+                    <ion-checkbox color="primary" formControlName="disponibilidadeMudar" name="disponibilidadeMudar"></ion-checkbox>
                   </ion-item>
 
                 </ion-card> <br>
@@ -181,14 +233,14 @@
 
                   <ion-item>
                     <ion-label>Pretensão salarial:&nbsp;&nbsp;</ion-label>
-                    <ion-input type="text" name="money" [(ngModel)]="candidato.dadosPessoais.pretensaoSalarial"  placeholder="(R$) Real" [brmasker]="{money: true}"></ion-input>
+                    <ion-input type="text" name="money" formControlName="pretensaoSalarial"  placeholder="(R$) Real" [brmasker]="{money: true}"></ion-input>
                   </ion-item>
                   
-                </ion-card> <br>                  
+                </ion-card>
 
                   <div class="ion-text-center">
                     <span>&nbsp; {{errorMsg}} </span>
-                    <ion-button type="submit" expand="block" #myBtn (click)="saveIt()">Salvar</ion-button>
+                    <ion-button type="submit" expand="block" #myBtn >Salvar</ion-button>
                   </div>                          
                 </div>
               </ion-col>

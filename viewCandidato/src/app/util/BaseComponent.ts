@@ -4,6 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BaseComponent{
 
     public errorMsg = '';
+
+    submetido: boolean = false;
     
     handleError(error) {
 

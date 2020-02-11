@@ -44,7 +44,7 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <form  (ngSubmit)="saveUser(myForm, myBtn)" #form="ngForm" [hidden]="!showRegisterForm" #myForm="ngForm">
+                  <form  #form [hidden]="!showRegisterForm" [formGroup]="validations_form" (submit)="saveUser(form, myBtn)">
                     <ion-grid>
                       <ion-row class="ion-justify-content-center">
                         <ion-col class="ion-align-self-center">
@@ -52,18 +52,31 @@
                             <h3>Minhas Informações:</h3>
                           </div>
                           <div class="ion-padding">
+                            
+                            <ion-item *ngIf="!validations_form.controls.username.valid  && (validations_form.controls.username.dirty) && submetido">
+                              <div style="color: red;">Entre com um email válido.</div>
+                            </ion-item>
                             <ion-item>
-                              <ion-label>Login:</ion-label>
-                              <ion-input  [(ngModel)]="newUser.username" type="text" placeholder="seu@email.com.br" name="email" required></ion-input>
+                              <ion-label>Email:</ion-label>
+                              <ion-input formControlName="username" placeholder="seu@email.com.br" name="email"></ion-input>  
+                            </ion-item>
+                            
+                            <ion-item *ngIf="!validations_form.controls.password.valid  && (validations_form.controls.password.dirty) && submetido">
+                              <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
                             </ion-item>
                             <ion-item>
                               <ion-label>Senha:</ion-label>
-                              <ion-input  [(ngModel)]="newUser.password" type="password" placeholder="Senha"  name="password" required></ion-input>
+                              <ion-input  formControlName="password" type="password" placeholder="Senha"  name="password" required></ion-input>
                             </ion-item>
+                            
+                            <ion-item *ngIf="!validations_form.controls.confirm.valid  && (validations_form.controls.confirm.dirty) && submetido">
+                              <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
+                            </ion-item>                            
                             <ion-item>
                               <ion-label>Confirma:</ion-label>
-                              <ion-input [(ngModel)]="newUser.confirm" type="password" placeholder="Senha novamente" name="confirm" required></ion-input>
+                              <ion-input formControlName="confirm" type="password" placeholder="Senha novamente" name="confirm" required></ion-input>
                             </ion-item>
+                            
                             <div class="ion-text-center">
                               <span>&nbsp; {{errorMsg2}} </span>
                               <ion-button style="padding-top: 5px;" type="submit" expand="block" #myBtn>Cadastro</ion-button>

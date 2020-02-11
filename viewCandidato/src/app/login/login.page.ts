@@ -24,10 +24,27 @@ export class LoginPage implements OnInit {
 
   validations_form: FormGroup;
 
+  submetido: boolean = false;
+
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
     private loginService: LoginService) {
    
+      this.validations_form  = this.formBuilder.group({
+        username: new FormControl('', Validators.compose([
+          Validators.required,          
+          Validators.pattern('^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')
+        ])),
+        password: new FormControl('', Validators.compose([
+          Validators.required, 
+          Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$')
+        ])),
+        confirm: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$¨%^&+=])(?=\\S+$).{8,}$')
+        ]))
+      });
+
    }
 
   public showRegisterForm = false;
@@ -35,39 +52,54 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
-    this.validations_form  = this.formBuilder.group({
-      username: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      password: new FormControl('', Validators.required)
-    });
+    
   }
 
   logar() {
-    
-/*
+
     this.loginService.logar(this.user).subscribe((header) => {
 
       this.router.navigate(['home']);
 
-    }, (a) => this._handleError(a, 1));*/
+    }, (a) => this._handleError(a, 1));
+
   }
 
+  bind(){
+
+    this.newUser.username = this.validations_form.get('username').value;
+    this.newUser.password = this.validations_form.get('password').value;
+    this.newUser.confirm = this.validations_form.get('confirm').value;
+     
+  }
+  
   saveUser(form: HTMLFormElement, btn: HTMLButtonElement) {
-    btn.disabled = true;
-    this.newUser.dataCadastro = new Date();
 
-    this.loginService.saveUser(this.newUser).subscribe( (resp) => {
-        this.errorMsg2 = 'Usuário cadastrado com sucesso!';
-        form.reset();
-        btn.disabled = false;
-    }, (out) => {
-      // console.log(out);
-      this._handleError(out, 2);
-      btn.disabled = false;
-    });
+    this.errorMsg2 = '';
+    this.submetido = true;
+    
+      this.bind();
+      if(this.validations_form.valid){
+        
+        btn.disabled = true;
+        this.newUser.dataCadastro = new Date();
+    
+        this.loginService.saveUser(this.newUser).subscribe( (resp) => {
+          this.errorMsg2 = 'Usuário cadastrado com sucesso!';
+            form.reset();
+            btn.disabled = false;
+        }, (out) => {
+          // console.log(out);
+          this._handleError(out, 2);
+          btn.disabled = false;
+        });
+
+      } else {
+        this.errorMsg2 = 'Por favor, preencha corretamente todos os campos.';
+      }
+
   }
+
 
   _handleError(error, form) {
 

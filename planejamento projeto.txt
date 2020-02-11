@@ -1,0 +1,42 @@
+horas investidas:
+
+8h reuniões
+4h dev dia 25/01
+2h dev 27
+4,3h dev 28
+2,5 dev 29
+4,5 dev 30
+3:30 dev 31
+
+8 dev 01/02  ( problema com o duranteTRS )
+3 dev 02/02
+
+3:30 10/02 
+
+
+todo:
+
+corrigir loading do user (gravar username)
+impl validacoes server side
+impl foto do usuario
+
+subir amazon
+
+implementar js validator para as senhas
+
+
+
+
+
+abril --> 
+
+plataforma  pronta
+
+fase 2 com duas --> integrações
+
+
+--------------------------------------------
+todo:
+estudar cors e separar a app em jars
+
+
