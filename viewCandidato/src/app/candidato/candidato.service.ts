@@ -5,6 +5,7 @@ import { Candidato } from '../model/Candidato';
 import { Observable } from 'rxjs';
 import { take, timeout, tap } from 'rxjs/operators';
 import { LoginService } from '../login/login.service';
+import { CV } from '../model/CV';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +74,28 @@ export class CandidatoService implements OnInit, OnDestroy {
     //}
 
   }
+
+  salvarCurriculo(cv: CV) {
+
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' +  this.loginService.getToken());
+
+    console.log('this.loginService.getToken()::' + this.loginService.getToken());
+    console.log(headers);
+
+    //if (!this.duranteTrs) {
+        //this.duranteTrs = true;
+        return this.http.post(this.API_CANDIDATO, cv,  { 
+          headers
+        })
+        .pipe(take(1))
+          .pipe( timeout(3000) );
+    //}
+
+  }
+
+
 
 }

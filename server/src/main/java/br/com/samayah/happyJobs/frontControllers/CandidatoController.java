@@ -34,8 +34,13 @@ public class CandidatoController {
 	public Candidato getCandidato(@RequestParam(name = "username") String username) throws BusinessException {
 		
 		Optional<Candidato> c = dpRepository.findById(username);			
-		System.out.println("candidato::" + c.get());
-		return c.get();
+		if(c.isPresent()) {
+			System.out.println("candidato::" + c.get());
+			return c.get();	
+		} 
+		
+		return null;
+		
     }
 	
 }

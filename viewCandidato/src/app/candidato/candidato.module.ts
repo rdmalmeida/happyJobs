@@ -6,8 +6,10 @@ import { RouterModule } from '@angular/router';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 
 import { BrMaskerModule } from 'br-mask';
-import { resolve } from 'url';
 import { CandidatoResolverGuard } from './candidato.guard';
+import { CvComponent } from './cv/cv/cv.component';
+import { FormacaoModalComponent } from './cv/formacao-modal/formacao-modal.component';
+import { FormacaoModalService } from './cv/formacao-modal/formacao-modal.service';
 
 
 @NgModule({
@@ -24,9 +26,18 @@ import { CandidatoResolverGuard } from './candidato.guard';
         resolve: {
           candidato: CandidatoResolverGuard
         }
+      },
+      {
+        path: 'cv',
+        component: CvComponent,
+        /*resolve: {
+          candidato: CandidatoResolverGuard
+        }*/
       }
     ])
   ],
-  declarations: [DadosPessoaisComponent]
+  declarations: [DadosPessoaisComponent, CvComponent, FormacaoModalComponent],
+  providers: [FormacaoModalService],
+  entryComponents: [FormacaoModalComponent]
 })
 export class CandidatoModule { }

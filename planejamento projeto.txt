@@ -12,15 +12,17 @@ horas investidas:
 3 dev 02/02
 
 3:30 10/02 
+2:30 11/02
+2:45 12/02 manhã + 1 noite
+01/03 1:30
 
 
 todo:
 
-corrigir loading do user (gravar username)
-impl validacoes server side
-impl foto do usuario
+corrigir loading do user (gravar username no browser) 
 
-subir amazon
+impl validacoes server side
+impl salvar foto do usuario (server)
 
 implementar js validator para as senhas
 

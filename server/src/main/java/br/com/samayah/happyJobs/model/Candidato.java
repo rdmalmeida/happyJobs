@@ -28,10 +28,10 @@ public class Candidato {
 	 * 
 	 * @JoinColumn(name = "username") private Users user;
 	 */
+		
+	@Embedded 
+	private CV cv;
 	
-	/*
-	 * @Embedded private Curriculum cv;
-	 */
 		
 
 }

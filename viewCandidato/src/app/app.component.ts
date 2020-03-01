@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
     },
     {
       title: 'Currículo',
-      url: '/cv',
+      url: '/candidato/cv',
       icon: 'list'
     },
     {

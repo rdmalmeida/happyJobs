@@ -3,9 +3,7 @@ package br.com.samayah.happyJobs.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

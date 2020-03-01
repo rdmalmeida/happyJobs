@@ -5,6 +5,7 @@ import {  HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TimeoutError } from 'rxjs';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { IonButton } from '@ionic/angular';
 
 
 @Component({
@@ -73,7 +74,7 @@ export class LoginPage implements OnInit {
      
   }
   
-  saveUser(form: HTMLFormElement, btn: HTMLButtonElement) {
+  saveUser(form: HTMLFormElement, btn: IonButton) {
 
     this.errorMsg2 = '';
     this.submetido = true;

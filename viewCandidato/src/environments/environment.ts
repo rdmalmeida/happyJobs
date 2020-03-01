@@ -7,6 +7,7 @@ export const environment = {
   // API: 'http://192.168.43.50:8080/api/'
   //API: 'http://192.168.15.4:8080/api/v1/'
   API: 'http://localhost:8080/api/v1/'
+  
 };
 
 /*

@@ -1,7 +1,6 @@
 package br.com.samayah.happyJobs.model;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -6,10 +6,11 @@ import { BaseComponent } from 'src/app/util/BaseComponent';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
 import { CandidatService } from '../candidat.service';
 import { CandidatoService } from '../candidato.service';
-import { IonItem } from '@ionic/angular';
+import { IonItem, IonButton } from '@ionic/angular';
 import { Observable, empty, bindCallback } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/login/login.service';
 
 
 
@@ -31,11 +32,40 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
   constructor(private router: Router,
     private candidatoService: CandidatoService, 
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private loginS: LoginService) {
 
     super();
     
    }
+
+
+   fileData: File = null;
+previewUrl:any = null;
+fileUploadProgress: string = null;
+uploadedFilePath: string = null;
+ 
+fileProgress(fileInput: any) {
+      this.fileData = <File>fileInput.target.files[0];
+      this.preview();
+}
+ 
+preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+ 
+    var reader = new FileReader();      
+
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+
+    reader.readAsDataURL(this.fileData); 
+
+}
 
   ngOnInit() {
     this.onRefresh(); 
@@ -47,8 +77,12 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
 
     console.log('iniciando...');
 
-    const candidato = this.route.snapshot.data['candidato'];
-    this.candidato = new Candidato(candidato.username, new DadosPessoais());
+    const username = this.loginS.getUsuarioLogado();
+
+    let candidato = this.route.snapshot.data['candidato'];
+    if(candidato === undefined || candidato == null){
+      candidato = new Candidato(username, new DadosPessoais(), null);
+    }
       
     this.validations_form  = this.fb.group({
       nomeCompleto: new FormControl(candidato.dadosPessoais.nomeCompleto, Validators.required), 
@@ -85,7 +119,7 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
   }
 
   //saveIt(){
-  save(form: HTMLFormElement, btn: HTMLButtonElement){
+  save(form: HTMLFormElement, btn: IonButton){
 
       this.submetido = true;
       this.bind();
@@ -111,7 +145,7 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
   bind(){
 
     const d = new DadosPessoais();
-    const c = new Candidato(this.candidato.username, d);  
+    const c = new Candidato(this.loginS.getUsuarioLogado(), d, null);  
     
     d.foto = this.validations_form.get('foto').value;
     d.nomeCompleto = this.validations_form.get('nomeCompleto').value;
