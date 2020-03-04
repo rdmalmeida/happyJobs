@@ -4,14 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { BaseComponent } from 'src/app/util/BaseComponent';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
-import { CandidatService } from '../candidat.service';
 import { CandidatoService } from '../candidato.service';
-import { IonItem, IonButton } from '@ionic/angular';
-import { Observable, empty, bindCallback } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { IonButton } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/login/login.service';
-
+import { Ng2PicaService } from 'ng2-pica';
 
 
 @Component({
@@ -33,17 +30,16 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
     private candidatoService: CandidatoService, 
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private loginS: LoginService) {
+    private loginS: LoginService,
+    private ng2Pica: Ng2PicaService) {
 
     super();
     
    }
 
 
-   fileData: File = null;
+fileData: File = null;
 previewUrl:any = null;
-fileUploadProgress: string = null;
-uploadedFilePath: string = null;
  
 fileProgress(fileInput: any) {
       this.fileData = <File>fileInput.target.files[0];
@@ -60,20 +56,53 @@ preview() {
     var reader = new FileReader();      
 
     reader.onload = (_event) => { 
+
       this.previewUrl = reader.result; 
+      this.redimensionaImg();
+      //console.log("reader.result::" + reader.result);
     }
 
     reader.readAsDataURL(this.fileData); 
 
 }
 
+  redimensionaImg(){
+
+    const fArray: File[] = new Array<File>();
+    fArray.push(this.fileData);
+
+    let finalBase64 = null;
+
+    this.ng2Pica.resize(fArray, 300, 300, true).subscribe(
+      result => {
+        console.log("result in blob::" + result);
+        
+        const reader = new FileReader();
+        reader.readAsDataURL(result); 
+        
+        reader.onload = () => { 
+        //reader.onloadend = function() {
+            finalBase64 = reader.result;                
+
+            //console.log("prefixo finalBase64::" + finalBase64.split(',')[0]);            
+            console.log("finalBase64::" + finalBase64.split(',')[1]);            
+            this.validations_form.patchValue({foto: finalBase64.split(',')[1]});
+        }
+        
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
+
+
+  }
+
   ngOnInit() {
     this.onRefresh(); 
   }
 
   onRefresh(){
-
-    
 
     console.log('iniciando...');
 
@@ -83,8 +112,12 @@ preview() {
     if(candidato === undefined || candidato == null){
       candidato = new Candidato(username, new DadosPessoais(), null);
     }
-      
-    this.validations_form  = this.fb.group({
+
+    if (this.previewUrl == null && candidato.dadosPessoais.foto != null){
+      this.previewUrl = "data:image/jpeg;base64," + candidato.dadosPessoais.foto;
+    }
+
+    this.validations_form = this.fb.group({
       nomeCompleto: new FormControl(candidato.dadosPessoais.nomeCompleto, Validators.required), 
       foto: new FormControl(candidato.dadosPessoais.foto),
            
@@ -147,7 +180,7 @@ preview() {
     const d = new DadosPessoais();
     const c = new Candidato(this.loginS.getUsuarioLogado(), d, null);  
     
-    d.foto = this.validations_form.get('foto').value;
+    d.foto = this.validations_form.get('foto').value;;
     d.nomeCompleto = this.validations_form.get('nomeCompleto').value;
     d.nascimento = this.validations_form.get('nascimento').value;
     d.rg = this.validations_form.get('rg').value;

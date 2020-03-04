@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform, MenuController, NavController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ArquiteturaService } from './util/arquitetura.service';
 
 @Component({
   selector: 'app-root',
@@ -38,15 +39,13 @@ export class AppComponent implements OnInit{
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menuCtrl: MenuController
+    private arqService: ArquiteturaService
   ) {
     this.initializeApp();
   }
 
   ngOnInit(): void {
-    this.menuCtrl.enable(false, 'menu1');
-    this.menuCtrl.isEnabled().then((a) => console.log('isMenuEnabled' + a));
-    this.menuCtrl.swipeGesture(false, 'menu1').then((a) => console.log('desativando menu::' + a));
+    this.arqService.setSideMenuActive(false);
   }
 
   initializeApp() {

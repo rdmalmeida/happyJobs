@@ -3,11 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
@@ -22,6 +17,15 @@ const routes: Routes = [
   {
     path: 'candidato',
     loadChildren: () => import('./candidato/candidato.module').then(m => m.CandidatoModule)
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
   }
 ];
 

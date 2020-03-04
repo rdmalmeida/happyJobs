@@ -14,19 +14,21 @@ horas investidas:
 3:30 10/02 
 2:30 11/02
 2:45 12/02 manhã + 1 noite
-01/03 1:30
+1:30 dev 01/03 
+2:15h dev 02/03 manhã + 1:40 noite
+1h 03/03 manhã + 1:10 tarde parte 1 + 1:45 parte 2 + 2h parte 3
+1:30 04/03 manhã + 
 
 
 todo:
+	
+mensagem bonitinha com alert padrão do sistema
 
-corrigir loading do user (gravar username no browser) 
+impl validacoes server side (devito tecnico)
 
-impl validacoes server side
-impl salvar foto do usuario (server)
+generic handler for double submit (devito tecnico)
 
-implementar js validator para as senhas
-
-
+logar erros e jogar na nuvem (devito tecnico)
 
 
 

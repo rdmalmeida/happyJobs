@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -8,10 +8,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './login/login.service';
-import { CandidatService } from './candidato/candidat.service';
 import { CandidatoService } from './candidato/candidato.service';
+import { ArquiteturaService } from './util/arquitetura.service';
+import { GlobalErrorHandler } from './util/global-error-handler';
+import { ServerErrorInterceptor } from './util/server-error.interceptor';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,10 +29,12 @@ import { CandidatoService } from './candidato/candidato.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+    //{ provide: ErrorHandler, useClass: GlobalErrorHandler},
+
+    ArquiteturaService,
     LoginService,
     CandidatoService,
-    CandidatService
     
   ],
   bootstrap: [AppComponent]

@@ -24,7 +24,8 @@ public class CandidatoController {
 	@RequestMapping(value = "candidato", method = RequestMethod.POST)
 	public Candidato saveCandidato(@RequestBody Candidato candidato) throws BusinessException {
 		
-		System.out.println("candidato::" + candidato);
+		//System.out.println("candidato::" + candidato);
+
 		dpRepository.save(candidato);
 				
 		return candidato;
@@ -35,9 +36,12 @@ public class CandidatoController {
 		
 		Optional<Candidato> c = dpRepository.findById(username);			
 		if(c.isPresent()) {
-			System.out.println("candidato::" + c.get());
-			return c.get();	
-		} 
+			
+			Candidato candidato = c.get();			
+			//System.out.println("candidato::" + candidato);
+			
+			return candidato;	
+		}
 		
 		return null;
 		

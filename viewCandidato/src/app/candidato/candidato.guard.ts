@@ -18,7 +18,7 @@ export class CandidatoResolverGuard implements Resolve<Candidato> {
     
     console.log('CandidatoResolverGuard::')
     const username = this.loginS.getUsuarioLogado();
-
+  
     return this.service.getCandidato(username);
   }
 }

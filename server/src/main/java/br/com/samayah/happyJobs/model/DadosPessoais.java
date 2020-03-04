@@ -1,6 +1,7 @@
 package br.com.samayah.happyJobs.model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DadosPessoais {
 
-	private String foto;
+	@Lob
+	private byte[] foto;
+	
 	private String nomeCompleto;
 	private String nascimento;
 	private String rg;

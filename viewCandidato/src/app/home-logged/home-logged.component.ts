@@ -1,6 +1,5 @@
-import { LocationStrategy } from '@angular/common';
-import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { ArquiteturaService } from '../util/arquitetura.service';
 
 @Component({
   selector: 'app-home-logged',
@@ -9,24 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeLoggedComponent implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private locationStrategy: LocationStrategy) { }
+  constructor(private arqService: ArquiteturaService) { }
 
   ngOnInit() {
-    this.menuCtrl.isEnabled().then((ativo) => {
-      if (!ativo) {
-        this.menuCtrl.enable(true, 'menu1');
-        this.menuCtrl.swipeGesture(true, 'menu1').then((a) => console.log('ativando rolagem menu::' + a));
-      }
-    });
-
-    this.preventBackButton();
+    this.arqService.setSideMenuActive(true);
+    this.arqService.preventBackButton();
   }
 
-  preventBackButton() {
-    history.pushState(null, null, location.href);
-    this.locationStrategy.onPopState(() => {
-      history.pushState(null, null, location.href);
-    });
-  }
+  
 
 }

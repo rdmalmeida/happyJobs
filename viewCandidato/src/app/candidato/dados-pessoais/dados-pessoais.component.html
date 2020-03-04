@@ -32,23 +32,10 @@
                       <ion-avatar class="avatar">
                         <img [src]="previewUrl" (click)="file.click()" *ngIf="previewUrl"/>
                         <img src="assets/prototipoImgs/minhaFoto.png" (click)="file.click()" *ngIf="!previewUrl"/>
-                      </ion-avatar>
-                      
-                      <input id='selecao-arquivo' type='file' formControlName="foto" placeholder="Foto" name="foto" (change)="fileProgress($event)" accept="image/*" #file>
+                      </ion-avatar>                      
+                      <input id='selecao-arquivo' type='file' (change)="fileProgress($event)" accept="image/*" #file>
 
                     </ion-item>
-
-                  <!--ion-item *ngIf="previewUrl">
-                      <ion-avatar style="height: 150px;width: 150px;" >
-                        <img [src]="previewUrl" (click)="file.click()" />
-                      </ion-avatar>                  
-                  </ion-item>
-
-                  <ion-item *ngIf="!previewUrl">
-                    <label for='selecao-arquivo'>Selecionar sua foto &#187;</label>
-                    <input id='selecao-arquivo' type='file' formControlName="foto" placeholder="Foto" name="foto" (change)="fileProgress($event)" accept="image/*" #file>
-                  </ion-item-->
-
 
                   <ion-item *ngIf="!validations_form.controls.nomeCompleto.valid  && (validations_form.controls.nomeCompleto.dirty) && submetido">
                     <div style="color: red;">Preencha seu nome completo.</div>

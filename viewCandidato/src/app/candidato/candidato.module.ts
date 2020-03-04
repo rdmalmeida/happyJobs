@@ -10,6 +10,7 @@ import { CandidatoResolverGuard } from './candidato.guard';
 import { CvComponent } from './cv/cv/cv.component';
 import { FormacaoModalComponent } from './cv/formacao-modal/formacao-modal.component';
 import { FormacaoModalService } from './cv/formacao-modal/formacao-modal.service';
+import { Ng2PicaModule, Ng2PicaService } from 'node_modules/ng2-pica/dist/ng2-pica';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormacaoModalService } from './cv/formacao-modal/formacao-modal.service
     IonicModule,
     BrMaskerModule,
     ReactiveFormsModule,
+    Ng2PicaModule,
     RouterModule.forChild([
       {
         path: '',
@@ -37,7 +39,7 @@ import { FormacaoModalService } from './cv/formacao-modal/formacao-modal.service
     ])
   ],
   declarations: [DadosPessoaisComponent, CvComponent, FormacaoModalComponent],
-  providers: [FormacaoModalService],
+  providers: [FormacaoModalService, Ng2PicaService ],
   entryComponents: [FormacaoModalComponent]
 })
 export class CandidatoModule { }
