@@ -12,7 +12,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './login/login.service';
 import { CandidatoService } from './candidato/candidato.service';
 import { ArquiteturaService } from './util/arquitetura.service';
-import { GlobalErrorHandler } from './util/global-error-handler';
 import { ServerErrorInterceptor } from './util/server-error.interceptor';
 
 
@@ -30,11 +29,10 @@ import { ServerErrorInterceptor } from './util/server-error.interceptor';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
-    //{ provide: ErrorHandler, useClass: GlobalErrorHandler},
-
+    
     ArquiteturaService,
     LoginService,
-    CandidatoService,
+    CandidatoService
     
   ],
   bootstrap: [AppComponent]

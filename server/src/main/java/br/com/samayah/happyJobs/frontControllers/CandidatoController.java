@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.samayah.happyJobs.dao.CandidatoRepository;
+import br.com.samayah.happyJobs.model.CV;
 import br.com.samayah.happyJobs.model.Candidato;
+import br.com.samayah.happyJobs.model.Formacao;
 import br.com.samayah.infra.BusinessException;
 
 @RestController
@@ -24,8 +26,8 @@ public class CandidatoController {
 	@RequestMapping(value = "candidato", method = RequestMethod.POST)
 	public Candidato saveCandidato(@RequestBody Candidato candidato) throws BusinessException {
 		
-		//System.out.println("candidato::" + candidato);
-
+		System.out.println("candidato::" + candidato);
+		addFormacaoKeys(candidato);
 		dpRepository.save(candidato);
 				
 		return candidato;
@@ -46,5 +48,16 @@ public class CandidatoController {
 		return null;
 		
     }
+	
+	private void addFormacaoKeys(Candidato candidato) {
+
+		CV cv = candidato.getCv();
+		if(cv!=null) {
+			for (Formacao f : cv.getFormacao()) {
+				f.setUsername(candidato.getUsername());
+			}	
+		}
+
+	}
 	
 }

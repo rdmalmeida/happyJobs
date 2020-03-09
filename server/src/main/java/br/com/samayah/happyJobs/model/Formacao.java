@@ -1,40 +1,38 @@
 package br.com.samayah.happyJobs.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-//@Entity
+@Entity
 @Data
 @NoArgsConstructor
 public class Formacao {
-		
-	@EmbeddedId
-	private FormacaoPK id;
+
+	@Id @GeneratedValue
+	private Long id;
+
+	private String username;
 	
+	@NonNull
 	private String escola;
 	
-	private Date dtInicio;
+	@NonNull
+	private String anoInicio;
 	
-	private Date dtFim;
+	@NonNull
+	private String anoFim;
 	
-	private String areaDeEstudo;
-	
+	@NonNull
 	private String descricao;
 	
-	//@Embeddable
-	@Data
-	private class FormacaoPK implements Serializable {
-
-		private static final long serialVersionUID = -7946944271216052892L;
-
-		private long id;
-		
-		private String cpf;	
-	}
+	@NonNull
+	private String grau;
+	
+	private String areaDeEstudo;
 
 }

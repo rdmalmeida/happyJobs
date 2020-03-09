@@ -17,7 +17,7 @@ horas investidas:
 1:30 dev 01/03 
 2:15h dev 02/03 manhã + 1:40 noite
 1h 03/03 manhã + 1:10 tarde parte 1 + 1:45 parte 2 + 2h parte 3
-1:30 04/03 manhã + 
+1:30 04/03 manhã + 1h parte 2 + 
 
 
 todo:

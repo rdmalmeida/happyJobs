@@ -15,23 +15,11 @@ public class Candidato {
 	@Id
 	private String username;
 
-	/*
-	 * @OneToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "username", unique = true)
-	 */
 	@Embedded
 	private DadosPessoais dadosPessoais;
-	
-	/*
-	 * @OneToOne
-	 * 
-	 * @JoinColumn(name = "username") private Users user;
-	 */
-		
+			
 	@Embedded 
 	private CV cv;
-	
 		
 
 }

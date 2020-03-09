@@ -1,11 +1,12 @@
 import { User } from './../model/User';
 import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
-import {  HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TimeoutError } from 'rxjs';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { IonButton } from '@ionic/angular';
+import { ArquiteturaService } from '../util/arquitetura.service';
+import { TimeoutError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -13,23 +14,22 @@ import { IonButton } from '@ionic/angular';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
 })
-export class LoginPage implements OnInit {
-
+export class LoginPage {
 
   public user: User = {username: '', password: '', enabled: true, dataCadastro: null, confirm: ''};
 
   public newUser: User = {username: '', password: '', enabled: true, dataCadastro: null, confirm: ''};
 
-  public errorMsg = '';
-  public errorMsg2 = '';
+  public validations_form: FormGroup;
 
-  validations_form: FormGroup;
+  public submetido: boolean = false;
 
-  submetido: boolean = false;
+  public showRegisterForm = false;
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private arqService: ArquiteturaService) {
    
       this.validations_form  = this.formBuilder.group({
         username: new FormControl('', Validators.compose([
@@ -48,14 +48,6 @@ export class LoginPage implements OnInit {
 
    }
 
-  public showRegisterForm = false;
-
-
-  ngOnInit() {
-
-    
-  }
-
   logar() {
 
     this.loginService.logar(this.user).subscribe((header) => {
@@ -63,30 +55,29 @@ export class LoginPage implements OnInit {
       this.router.navigate(['home']);
 
     }, (a) => this._handleError(a, 1));
-
   }
 
   bind(){
 
     this.newUser.username = this.validations_form.get('username').value;
     this.newUser.password = this.validations_form.get('password').value;
-    this.newUser.confirm = this.validations_form.get('confirm').value;
-     
+    this.newUser.confirm = this.validations_form.get('confirm').value;    
   }
   
   saveUser(form: HTMLFormElement, btn: IonButton) {
 
-    this.errorMsg2 = '';
     this.submetido = true;
-    
-      this.bind();
-      if(this.validations_form.valid){
+    let mensagem: string;
+
+    this.bind();
+    if(this.validations_form.valid){
         
         btn.disabled = true;
         this.newUser.dataCadastro = new Date();
     
         this.loginService.saveUser(this.newUser).subscribe( (resp) => {
-          this.errorMsg2 = 'Usuário cadastrado com sucesso!';
+          mensagem = 'Usuário cadastrado com sucesso!';
+          this.arqService.showToastMessage(mensagem);
             form.reset();
             btn.disabled = false;
         }, (out) => {
@@ -96,7 +87,8 @@ export class LoginPage implements OnInit {
         });
 
       } else {
-        this.errorMsg2 = 'Por favor, preencha corretamente todos os campos.';
+        mensagem = 'Por favor, preencha corretamente todos os campos.';
+        this.arqService.showToastErrorMessage(mensagem);
       }
 
   }
@@ -122,11 +114,7 @@ export class LoginPage implements OnInit {
       }
     }
 
-    if (form === 1) {
-      this.errorMsg = mensagem;
-    } else {
-      this.errorMsg2 = mensagem;
-    }
+    this.arqService.showToastErrorMessage(mensagem);
   }
 
   showCadastro() {

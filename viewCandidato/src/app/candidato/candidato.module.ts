@@ -7,10 +7,10 @@ import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.componen
 
 import { BrMaskerModule } from 'br-mask';
 import { CandidatoResolverGuard } from './candidato.guard';
-import { CvComponent } from './cv/cv/cv.component';
+import { CvComponent } from './cv/cv.component';
 import { FormacaoModalComponent } from './cv/formacao-modal/formacao-modal.component';
-import { FormacaoModalService } from './cv/formacao-modal/formacao-modal.service';
 import { Ng2PicaModule, Ng2PicaService } from 'node_modules/ng2-pica/dist/ng2-pica';
+import { XpProfModalComponent } from './cv/xp-prof-modal/xp-prof-modal.component';
 
 
 @NgModule({
@@ -32,14 +32,14 @@ import { Ng2PicaModule, Ng2PicaService } from 'node_modules/ng2-pica/dist/ng2-pi
       {
         path: 'cv',
         component: CvComponent,
-        /*resolve: {
+        resolve: {
           candidato: CandidatoResolverGuard
-        }*/
+        }
       }
     ])
   ],
-  declarations: [DadosPessoaisComponent, CvComponent, FormacaoModalComponent],
-  providers: [FormacaoModalService, Ng2PicaService ],
-  entryComponents: [FormacaoModalComponent]
+  declarations: [DadosPessoaisComponent, CvComponent, FormacaoModalComponent, XpProfModalComponent],
+  providers: [Ng2PicaService ],
+  entryComponents: [FormacaoModalComponent, XpProfModalComponent]
 })
 export class CandidatoModule { }

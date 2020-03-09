@@ -1,21 +1,49 @@
 package br.com.samayah.happyJobs.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+@Entity
+@Data
+@NoArgsConstructor
 public class ExperienciaProfissional {
 	
-	String empresa;
+	@Id @GeneratedValue
+	private Long id;
+
+	@NonNull
+	private String username;
 	
-	String cidade;
+	@NonNull
+	private String titulo;
 	
-	String pais;
+	@NonNull
+	private String empresa;
 	
-	String titutlo;
+	@NonNull
+	private String cidade;
 	
-	//por combo
-	String perfil;
+	@NonNull
+	private String pais;
+			
+	@NonNull
+	private String mesInicio;
 	
-	//datas
-	String periodo;
+	@NonNull
+	private String mesFim;
 	
-	String descricao;
+	@NonNull
+	private String anoInicio;
+	
+	@NonNull
+	private String anoFim;
+	
+	@NonNull
+	private String descricao;
 
 }

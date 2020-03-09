@@ -15,23 +15,21 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class CV {
 	
+	@NonNull
+	private String titulo;
 	
 	@NonNull
-	private String cvTitulo;
-	
-	@NonNull
-	private String cvDescricao;
+	private String resumo;
+		
+	@OneToMany( cascade = CascadeType.ALL )
+	@JoinColumn(name = "username")
+	private List<Formacao> formacao;
+	//@OrderColumn(name = "id" )
+	//private Formacao[] formacao = new Formacao[10];
 	
 	//List<ExperienciaProfissional> xpsLista;
 	
 	//List<OutraExperiencia> outrasXpsLista;
 	
-	/*
-	 * @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true )
-	 * 
-	 * @JoinColumn(name = "cpf") private List<Formacao> formacaoLista;
-	 */
-	
 	//List<String> certificacoesLista;
-	
 }

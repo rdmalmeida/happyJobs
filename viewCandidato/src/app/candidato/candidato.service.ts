@@ -13,6 +13,7 @@ import { CV } from '../model/CV';
 export class CandidatoService { 
 
   private readonly API_CANDIDATO = environment.API + 'candidato';
+  //private readonly API_CURRICULO = this.API_CANDIDATO + '/cv';
 
   constructor(private http: HttpClient,
     private loginService: LoginService
@@ -38,10 +39,10 @@ export class CandidatoService {
 
   }
 
-  salvarCurriculo(cv: CV) {
+  /*salvarCurriculo(cv: CV) {
 
-    return this.http.post(this.API_CANDIDATO, cv)
+    return this.http.post(this.API_CURRICULO, ca)
        .pipe(take(1));
-  }
+  }*/
 
 }
