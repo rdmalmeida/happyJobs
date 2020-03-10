@@ -16,10 +16,10 @@ public class Candidato {
 	private String username;
 
 	@Embedded
-	private DadosPessoais dadosPessoais;
+	private DadosPessoais dadosPessoais = new DadosPessoais();
 			
 	@Embedded 
-	private CV cv;
+	private CV cv = new CV();
 		
 
 }

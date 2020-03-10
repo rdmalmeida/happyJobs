@@ -17,7 +17,7 @@ export class CandidatoResolverGuard implements Resolve<Candidato> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Candidato> {
 
     const username = this.loginS.getUsuarioLogado();        
-    console.log('CandidatoResolverGuard::candidato::');
+    console.log('CandidatoResolverGuard::');
     return this.service.getCandidato(username);
   }
 }

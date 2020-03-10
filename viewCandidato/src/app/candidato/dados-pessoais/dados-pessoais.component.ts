@@ -11,6 +11,8 @@ import { LoginService } from 'src/app/login/login.service';
 import { Ng2PicaService } from 'ng2-pica';
 import { ArquiteturaService } from 'src/app/util/arquitetura.service';
 import { CV } from 'src/app/model/CV';
+import { Formacao } from 'src/app/model/Formacao';
+import { XpProfissional } from 'src/app/model/XpProfissional';
 
 
 @Component({
@@ -37,6 +39,7 @@ export class DadosPessoaisComponent extends BaseComponent implements OnInit {
     private arqService: ArquiteturaService) { 
 
     super();
+    this.arqService.setSideMenuActive(true);
 
    }
 
@@ -105,10 +108,17 @@ preview() {
       this.candidato = new Candidato(username, new DadosPessoais(), new CV());
     }else {
       this.candidato = candidato;
+      
+      if(this.candidato.dadosPessoais == null){
+        this.candidato.dadosPessoais = new DadosPessoais();
+      }
+      if(this.candidato.cv == null){
+        this.candidato.cv = new CV();
+      }
     }
 
-    console.log('candidato::' + this.candidato);    
-    console.log(this.candidato.dadosPessoais);
+    console.log(this.candidato);    
+
     if (this.previewUrl == null && this.candidato.dadosPessoais.foto != null){
       this.previewUrl = "data:image/jpeg;base64," + this.candidato.dadosPessoais.foto;
     }
@@ -152,7 +162,6 @@ preview() {
       this.bind();
       
       console.log(this.candidato);
-      console.log('this.validations_form.valid::'+ this.validations_form.valid);
 
       if(this.validations_form.valid){
         this.candidatoService.salvarCandidato(this.candidato).subscribe(

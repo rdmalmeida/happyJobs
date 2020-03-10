@@ -181,7 +181,7 @@
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Cep:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="cep" type="text" placeholder="Cep" name="cep" required></ion-input>
+                    <ion-input formControlName="cep" type="text" placeholder="Cep" name="cep" [brmasker]="{mask:'00.000-00', len:10}" required></ion-input>
                   </ion-item>
                   
                 </ion-card> <br>
@@ -242,7 +242,7 @@
                 </ion-card>
 
                   <div class="ion-text-center">
-                    <span>&nbsp; {{errorMsg}} </span>
+                    <span>&nbsp;  </span>
                     <ion-button type="submit" expand="block" #myBtn >Salvar</ion-button>
                   </div>                          
                 </div>

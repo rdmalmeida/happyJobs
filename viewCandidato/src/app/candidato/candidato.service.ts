@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Candidato } from '../model/Candidato';
-import { take, timeout } from 'rxjs/operators';
-import { LoginService } from '../login/login.service';
-import { CV } from '../model/CV';
+import { take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,8 +13,7 @@ export class CandidatoService {
   private readonly API_CANDIDATO = environment.API + 'candidato';
   //private readonly API_CURRICULO = this.API_CANDIDATO + '/cv';
 
-  constructor(private http: HttpClient,
-    private loginService: LoginService
+  constructor(private http: HttpClient
     ){ 
       console.log('CandidatoService construído!')
     }
@@ -38,11 +35,5 @@ export class CandidatoService {
         .pipe(take(1));
 
   }
-
-  /*salvarCurriculo(cv: CV) {
-
-    return this.http.post(this.API_CURRICULO, ca)
-       .pipe(take(1));
-  }*/
 
 }

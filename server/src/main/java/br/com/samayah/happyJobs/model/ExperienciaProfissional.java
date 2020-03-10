@@ -26,11 +26,8 @@ public class ExperienciaProfissional {
 	private String empresa;
 	
 	@NonNull
-	private String cidade;
-	
-	@NonNull
-	private String pais;
-			
+	private String descricao;
+
 	@NonNull
 	private String mesInicio;
 	
@@ -44,6 +41,9 @@ public class ExperienciaProfissional {
 	private String anoFim;
 	
 	@NonNull
-	private String descricao;
+	private String cidade;
+	
+	@NonNull
+	private String pais;
 
 }

@@ -24,10 +24,10 @@ public class CV {
 	@OneToMany( cascade = CascadeType.ALL )
 	@JoinColumn(name = "username")
 	private List<Formacao> formacao;
-	//@OrderColumn(name = "id" )
-	//private Formacao[] formacao = new Formacao[10];
-	
-	//List<ExperienciaProfissional> xpsLista;
+
+	@OneToMany( cascade = CascadeType.ALL )
+	@JoinColumn(name = "username")
+	private List<ExperienciaProfissional> xpProf;
 	
 	//List<OutraExperiencia> outrasXpsLista;
 	
