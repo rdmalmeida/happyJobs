@@ -18,12 +18,13 @@ horas investidas:
 2:15h dev 02/03 manhã + 1:40 noite
 1h 03/03 manhã + 1:10 tarde parte 1 + 1:45 parte 2 + 2h parte 3
 1:30 04/03 manhã + 1h parte 2 + 
+dias 5,6,9,10 -> 6h cada +2h casa = 26horas
+dia 11 -> 2h
+dia 12 ->1h manhã
 
 
 todo:
 	
-mensagem bonitinha com alert padrão do sistema
-
 impl validacoes server side (devito tecnico)
 
 generic handler for double submit (devito tecnico)

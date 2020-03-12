@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Candidato } from 'src/app/model/Candidato';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { BaseComponent } from 'src/app/util/BaseComponent';
+import { BaseComponent } from 'src/app/shared/BaseComponent';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
 import { CandidatoService } from '../candidato.service';
 import { IonButton } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/login/login.service';
 import { Ng2PicaService } from 'ng2-pica';
-import { ArquiteturaService } from 'src/app/util/arquitetura.service';
+import { ArquiteturaService } from 'src/app/shared/arquitetura.service';
 import { CV } from 'src/app/model/CV';
-import { Formacao } from 'src/app/model/Formacao';
-import { XpProfissional } from 'src/app/model/XpProfissional';
+import { CpfValidator } from 'src/app/shared/cpf-validator';
+
 
 
 @Component({
@@ -133,7 +133,7 @@ preview() {
       foto: new FormControl(candidato.dadosPessoais.foto),
       nascimento: new FormControl(candidato.dadosPessoais.nascimento, Validators.required),
       rg: new FormControl(candidato.dadosPessoais.rg, Validators.required),
-      cpf: new FormControl(candidato.dadosPessoais.cpf, Validators.required),
+      cpf: new FormControl(candidato.dadosPessoais.cpf, CpfValidator.isValidCpf()),
       nacionalidade: new FormControl(candidato.dadosPessoais.nacionalidade, Validators.required),
       naturalidade: new FormControl(candidato.dadosPessoais.naturalidade, Validators.required),
       estadoCivil: new FormControl(candidato.dadosPessoais.estadoCivil, Validators.required),
@@ -151,7 +151,7 @@ preview() {
       bairro: new FormControl(candidato.dadosPessoais.bairro, Validators.required),
       cidade: new FormControl(candidato.dadosPessoais.cidade, Validators.required),
       uf: new FormControl(candidato.dadosPessoais.uf, Validators.required),
-      cep: new FormControl(candidato.dadosPessoais.cep, Validators.required),
+      cep: new FormControl(candidato.dadosPessoais.cep, Validators.minLength(10)),
       complemento: new FormControl(candidato.dadosPessoais.complemento)
     });
   }
@@ -174,13 +174,13 @@ preview() {
   }
 
   bind(){
-
    
     this.candidato.dadosPessoais.foto = this.validations_form.get('foto').value;;
     this.candidato.dadosPessoais.nomeCompleto = this.validations_form.get('nomeCompleto').value;
     this.candidato.dadosPessoais.nascimento = this.validations_form.get('nascimento').value;
-    this.candidato.dadosPessoais.rg = this.validations_form.get('rg').value;
-    this.candidato.dadosPessoais.cpf = this.validations_form.get('cpf').value;
+    this.candidato.dadosPessoais.rg = this.validations_form.get('rg').value;    
+    let cpf = this.validations_form.get('cpf').value;    
+    this.candidato.dadosPessoais.cpf = cpf.replace(/[^\d]+/g,'');
     this.candidato.dadosPessoais.nacionalidade = this.validations_form.get('nacionalidade').value;
     this.candidato.dadosPessoais.naturalidade = this.validations_form.get('naturalidade').value;
     this.candidato.dadosPessoais.estadoCivil = this.validations_form.get('estadoCivil').value;

@@ -11,8 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './login/login.service';
 import { CandidatoService } from './candidato/candidato.service';
-import { ArquiteturaService } from './util/arquitetura.service';
-import { ServerErrorInterceptor } from './util/server-error.interceptor';
+import { ArquiteturaService } from './shared/arquitetura.service';
+import { ServerErrorInterceptor } from './shared/server-error.interceptor';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArquiteturaService } from '../util/arquitetura.service';
-import { BaseComponent } from '../util/BaseComponent';
+import { ArquiteturaService } from '../shared/arquitetura.service';
+import { BaseComponent } from '../shared/BaseComponent';
 
 @Component({
   selector: 'app-home-logged',

@@ -16,7 +16,7 @@
                   </div>
                   <ion-card-content>    
                     <form (ngSubmit)="logar()" id="formularioLogin" #formularioLogin >           
-                        <ion-item>
+                     <ion-item>
                             <ion-label>&nbsp;Login&nbsp;:</ion-label>
                             <ion-input type="text" [(ngModel)]="user.username" name="username" required></ion-input>
                           </ion-item>
@@ -53,28 +53,28 @@
                           </div>
                           <div class="ion-padding">
                             
-                            <ion-item *ngIf="!validations_form.controls.username.valid  && (validations_form.controls.username.dirty) && submetido">
+                            <ion-item *ngIf="!validations_form.controls.username.valid  && (validations_form.controls.username.dirty || validations_form.controls.username.touched) && submetido">
                               <div style="color: red;">Entre com um email válido.</div>
                             </ion-item>
                             <ion-item>
                               <ion-label>Email:</ion-label>
-                              <ion-input formControlName="username" placeholder="seu@email.com.br" name="email"></ion-input>  
+                              <ion-input formControlName="username" placeholder="seu@email.com.br" name="email" maxLength="90" required></ion-input>  
                             </ion-item>
                             
-                            <ion-item *ngIf="!validations_form.controls.password.valid  && (validations_form.controls.password.dirty) && submetido">
+                            <ion-item *ngIf="!validations_form.controls.password.valid  && (validations_form.controls.password.dirty || validations_form.controls.password.touched) && submetido">
                               <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
                             </ion-item>
                             <ion-item>
                               <ion-label>Senha:</ion-label>
-                              <ion-input  formControlName="password" type="password" placeholder="Senha"  name="password" required></ion-input>
+                              <ion-input  formControlName="password" type="password" placeholder="Senha"  name="password" maxLength="50" required></ion-input>
                             </ion-item>
                             
-                            <ion-item *ngIf="!validations_form.controls.confirm.valid  && (validations_form.controls.confirm.dirty) && submetido">
+                            <ion-item *ngIf="!validations_form.controls.confirm.valid  && (validations_form.controls.confirm.dirty || validations_form.controls.confirm.touched) && submetido">
                               <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
                             </ion-item>                            
                             <ion-item>
                               <ion-label>Confirma:</ion-label>
-                              <ion-input formControlName="confirm" type="password" placeholder="Senha novamente" name="confirm" required></ion-input>
+                              <ion-input formControlName="confirm" type="password" placeholder="Senha novamente" name="confirm" maxLength="50" required></ion-input>
                             </ion-item>
                             
                             <div class="ion-text-center">

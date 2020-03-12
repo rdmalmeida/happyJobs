@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { IonButton } from '@ionic/angular';
-import { ArquiteturaService } from '../util/arquitetura.service';
+import { ArquiteturaService } from '../shared/arquitetura.service';
 import { TimeoutError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CpfValidator } from '../shared/cpf-validator';
 
 
 @Component({

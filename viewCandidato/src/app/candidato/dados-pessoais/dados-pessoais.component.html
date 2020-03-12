@@ -15,7 +15,7 @@
 
           <ion-grid>
             <ion-row class="ion-justify-content-center">
-              <ion-col class="ion-align-self-center"  size-md="6" size-lg="6" size-xs="12">
+              <ion-col class="ion-align-self-center"  size-md="6" size-lg="8" size-xs="12">
                 <div class="ion-text-center">
                   <h3>Minhas Informações:</h3>
                 </div>
@@ -34,15 +34,15 @@
 
                     </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.nomeCompleto.valid  && (validations_form.controls.nomeCompleto.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.nomeCompleto.valid  && (validations_form.controls.nomeCompleto.dirty || validations_form.controls.nomeCompleto.touched) && submetido">
                     <div style="color: red;">Preencha seu nome completo.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Nome:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="nomeCompleto" placeholder="Nome Completo"  name="nomeCompleto" required></ion-input>
+                    <ion-input formControlName="nomeCompleto" placeholder="Nome Completo" name="nomeCompleto" maxLength="90" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.nascimento.valid  && (validations_form.controls.nascimento.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.nascimento.valid  && (validations_form.controls.nascimento.dirty || validations_form.controls.nascimento.touched) && submetido">
                     <div style="color: red;">Preencha sua data de nascimento.</div>
                   </ion-item>                            
                   <ion-item>
@@ -50,23 +50,26 @@
                     <ion-datetime formControlName="nascimento" displayFormat="DD/MM/YYYY" name="nascimento" doneText="Ok" cancelText="Cancelar" required></ion-datetime>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.rg.valid  && (validations_form.controls.rg.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.rg.valid  && (validations_form.controls.rg.dirty || validations_form.controls.rg.touched) && submetido">
                     <div style="color: red;">Preencha seu RG.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>RG:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="rg" type="text" placeholder="RG" name="rg" required></ion-input>
+                    <ion-input formControlName="rg" type="text" placeholder="RG" name="rg" maxLength="20" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.cpf.valid  && (validations_form.controls.cpf.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.cpf.valid  && (validations_form.controls.cpf.dirty || validations_form.controls.cpf.touched) && submetido && !validations_form.get('cpf').getError('cpfNotValid')">
                     <div style="color: red;">Preencha seu CPF.</div>
-                  </ion-item>                            
+                  </ion-item>
+                  <ion-item *ngIf="!validations_form.controls.cpf.valid && validations_form.get('cpf').getError('cpfNotValid') && submetido"> 
+                    <div style="color: red;">O cpf não é válido.</div>
+                  </ion-item>
                   <ion-item>
                     <ion-label>CPF:&nbsp;&nbsp;</ion-label>
                     <ion-input type="text" formControlName="cpf" name="cpf"  placeholder="CPF" [brmasker]="{mask:'000.000.000-00', len:14}" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.nacionalidade.valid  && (validations_form.controls.nacionalidade.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.nacionalidade.valid  && (validations_form.controls.nacionalidade.dirty || validations_form.controls.nacionalidade.touched) && submetido">
                     <div style="color: red;">Preencha sua nacionalidade.</div>
                   </ion-item>                            
                   <ion-item>
@@ -74,15 +77,15 @@
                     <ion-input formControlName="nacionalidade" type="text" placeholder="Nacionalidade" name="nacionalidade" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.naturalidade.valid  && (validations_form.controls.naturalidade.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.naturalidade.valid  && (validations_form.controls.naturalidade.dirty || validations_form.controls.naturalidade.touched ) && submetido">
                     <div style="color: red;">Preencha sua naturalidade.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Naturalidade:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="naturalidade" type="text" placeholder="Naturalidade" name="naturalidade" required></ion-input>
+                    <ion-input formControlName="naturalidade" type="text" placeholder="Naturalidade" name="naturalidade" maxLength="40" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.estadoCivil.valid  && (validations_form.controls.estadoCivil.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.estadoCivil.valid  && (validations_form.controls.estadoCivil.dirty || validations_form.controls.estadoCivil.touched) && submetido">
                     <div style="color: red;">Preencha seu estado civil.</div>
                   </ion-item>                            
                   <ion-item>
@@ -97,7 +100,7 @@
                   </ion-item>
                   
 
-                  <ion-item *ngIf="!validations_form.controls.genero.valid  && (validations_form.controls.genero.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.genero.valid  && (validations_form.controls.genero.dirty || validations_form.controls.genero.touched) && submetido">
                     <div style="color: red;">Preencha seu gênero</div>
                   </ion-item>                            
                   <ion-item>
@@ -113,36 +116,36 @@
                 <ion-card class="welcome-card">
 
 
-                  <ion-item *ngIf="!validations_form.controls.logradouro.valid  && (validations_form.controls.logradouro.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.logradouro.valid  && (validations_form.controls.logradouro.dirty || validations_form.controls.logradouro.touched) && submetido">
                     <div style="color: red;">Preencha seu logradouro.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Logradouro:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="logradouro" type="text" placeholder="Logradouro" name="logradouro" required></ion-input>
+                    <ion-input formControlName="logradouro" type="text" placeholder="Logradouro" name="logradouro" maxLength="90" required></ion-input>
                   </ion-item>
                   
                   <ion-item>
                     <ion-label>Complemento:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="complemento" type="text" placeholder="Complemento" name="complemento"></ion-input>
+                    <ion-input formControlName="complemento" type="text" placeholder="Complemento" name="complemento" maxLength="90"></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.bairro.valid  && (validations_form.controls.bairro.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.bairro.valid  && (validations_form.controls.bairro.dirty || validations_form.controls.bairro.touched) && submetido">
                     <div style="color: red;">Preencha seu bairro</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Bairro:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="bairro" type="text" placeholder="Bairro" name="bairro" required></ion-input>
+                    <ion-input formControlName="bairro" type="text" placeholder="Bairro" name="bairro" maxLength="50" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.cidade.valid  && (validations_form.controls.cidade.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.cidade.valid  && (validations_form.controls.cidade.dirty || validations_form.controls.cidade.touched) && submetido">
                     <div style="color: red;">Preencha sua cidade.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Cidade:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="cidade" type="text" placeholder="Cidade" name="cidade" required></ion-input>
+                    <ion-input formControlName="cidade" type="text" placeholder="Cidade" name="cidade" maxLength="50" required></ion-input>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.uf.valid  && (validations_form.controls.uf.dirty) && submetido">
+                  <ion-item *ngIf="!validations_form.controls.uf.valid  && (validations_form.controls.uf.dirty || validations_form.controls.uf.touched) && submetido">
                     <div style="color: red;">Preencha sua UF de origem.</div>
                   </ion-item>                            
                   <ion-item>
@@ -176,8 +179,8 @@
                     </ion-select>
                   </ion-item>
 
-                  <ion-item *ngIf="!validations_form.controls.cep.valid  && (validations_form.controls.cep.dirty) && submetido">
-                    <div style="color: red;">Preencha seu CEP.</div>
+                  <ion-item *ngIf="!validations_form.controls.cep.valid  && (validations_form.controls.cep.dirty || validations_form.controls.cep.touched) && submetido">
+                    <div style="color: red;">Preencha o CEP corretamente.</div>
                   </ion-item>                            
                   <ion-item>
                     <ion-label>Cep:&nbsp;&nbsp;</ion-label>
@@ -190,15 +193,15 @@
 
                   <ion-item>
                     <ion-label>Link do Facebook:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="linkFace" type="text" placeholder="Link do Facebook" name="linkFace"></ion-input>
+                    <ion-input formControlName="linkFace" type="text" placeholder="Link do Facebook" name="linkFace" maxLength="90"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>LinkedIn:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="linkedIn" type="text" placeholder="LinkedIN" name="linkedIn"></ion-input>
+                    <ion-input formControlName="linkedIn" type="text" placeholder="LinkedIN" name="linkedIn" maxLength="90"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Instagram:&nbsp;&nbsp;</ion-label>
-                    <ion-input formControlName="instagram" type="text" placeholder="Instagram" name="instagram"></ion-input>
+                    <ion-input formControlName="instagram" type="text" placeholder="Instagram" name="instagram" maxLength="90"></ion-input>
                   </ion-item>
 
                 </ion-card> <br>

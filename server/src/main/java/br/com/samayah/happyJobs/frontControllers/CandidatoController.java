@@ -55,9 +55,11 @@ public class CandidatoController {
 
 		CV cv = candidato.getCv();
 		if(cv!=null) {
-			for (Formacao f : cv.getFormacao()) {
-				f.setUsername(candidato.getUsername());
-			}	
+			if(cv.getFormacao()!=null) {
+				for (Formacao f : cv.getFormacao()) {
+					f.setUsername(candidato.getUsername());
+				}	
+			}				
 		}
 
 	}
@@ -66,9 +68,12 @@ public class CandidatoController {
 
 		CV cv = candidato.getCv();
 		if(cv!=null) {
-			for (ExperienciaProfissional xp : cv.getXpProf()) {
-				xp.setUsername(candidato.getUsername());
-			}	
+			if(cv.getXpProf()!=null) {
+				for (ExperienciaProfissional xp : cv.getXpProf()) {
+					xp.setUsername(candidato.getUsername());
+				}	
+			}
+				
 		}
 
 	}
