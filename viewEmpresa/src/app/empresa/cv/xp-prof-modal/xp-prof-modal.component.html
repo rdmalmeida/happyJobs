@@ -1,0 +1,115 @@
+
+<ion-content>
+
+  <ion-header translucent>
+    <ion-toolbar color="gray">
+      <ion-title>Experiência Profissional</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">X</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+    <form  #form (ngSubmit)="save(form, myBtn)" [formGroup]="validations_form">
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-self-center" size-md="12" size-lg="12" size-xs="12">
+
+            <div class="ion-padding">
+
+              <ion-card class="welcome-card">
+                
+                  <ion-item *ngIf="!validations_form.controls.empresa.valid  && (validations_form.controls.empresa.dirty || validations_form.controls.empresa.touched) && submetido">
+                    <div style="color: red;">Digite o nome da empresa.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Empresa:</ion-label>
+                    <ion-input formControlName="empresa" placeholder="Empresa"  name="empresa" maxLength="100" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.titulo.valid  && (validations_form.controls.titulo.dirty || validations_form.controls.titulo.touched) && submetido">
+                    <div style="color: red;">Digite o título do cargo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Título:</ion-label>
+                    <ion-input formControlName="titulo" placeholder="Título"  name="titulo" maxLength="100" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.descricao.valid  && (validations_form.controls.descricao.dirty || validations_form.controls.descricao.touched) && submetido">
+                    <div style="color: red;">Descreva suas atividades.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Descrição:</ion-label>
+                    <ion-input formControlName="descricao" placeholder="Descrição"  name="descricao" maxLength="100" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.mesInicio.valid  && (validations_form.controls.mesInicio.dirty || validations_form.controls.mesInicio.touched) && submetido">
+                    <div style="color: red;">Entre com o mês de início do vínculo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Mês de início:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Mês de início" formControlName="mesInicio" name="mesInicio" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="inicioPopOverMesOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of meses;index as i" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.anoInicio.valid  && (validations_form.controls.anoInicio.dirty || validations_form.controls.anoInicio.touched) && submetido">
+                    <div style="color: red;">Entre com o ano de início do vínculo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Ano de início:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Ano de início" formControlName="anoInicio" name="anoInicio" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="inicioPopOverAnoOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of anos;" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.mesFim.valid  && (validations_form.controls.mesFim.dirty || validations_form.controls.mesFim.touched) && submetido">
+                    <div style="color: red;">Entre com o mês de fim do vínculo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Mês de fim:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Mês de fim" formControlName="mesFim" name="mesFim" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="fimPopOverMesOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of meses;" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.anoFim.valid  && (validations_form.controls.anoFim.dirty || validations_form.controls.anoFim.touched) && submetido">
+                    <div style="color: red;">Entre com o ano de fim do vínculo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Ano fim:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Fim do vínculo" formControlName="anoFim" name="anoFim" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="fimPopOverAnoOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of anos;" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cidade.valid  && (validations_form.controls.cidade.dirty || validations_form.controls.cidade.touched) && submetido">
+                    <div style="color: red;">Digite a cidade.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Cidade:</ion-label>
+                    <ion-input formControlName="cidade" placeholder="Cidade"  name="cidade" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.pais.valid  && (validations_form.controls.pais.dirty || validations_form.controls.nomeCompleto.touched) && submetido">
+                    <div style="color: red;">Digite o país.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>País:</ion-label>
+                    <ion-input formControlName="pais" placeholder="País"  name="pais" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <br>
+                  <div class="ion-text-center">
+                    <span>&nbsp;  </span>
+                    <ion-button type="submit" expand="block" #myBtn >Adicionar</ion-button>
+                  </div> 
+
+            </ion-card> <br>
+</div>
+</ion-col>
+</ion-row>
+</ion-grid>
+</form>
+</ion-content>

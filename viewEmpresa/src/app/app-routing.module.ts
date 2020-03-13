@@ -1,13 +1,7 @@
-import { HomeLoggedModule } from './home-logged/home-logged.module';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
@@ -19,6 +13,19 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home-logged/home-logged.module').then(m => m.HomeLoggedModule)
+  },
+  {
+    path: 'empresa',
+    loadChildren: () => import('./empresa/empresa.module').then(m => m.EmpresaModule)
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
   }
 ];
 

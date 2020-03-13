@@ -13,11 +13,6 @@ export class LoginService {
   private readonly API = environment.API + 'authenticate';
   private readonly API_USERS = environment.API + 'users';
 
-
-  private token: string;
-
-  private duranteTrs = false;
-
   constructor(private http: HttpClient) { }
 
   public logar(user: User): Observable < any > {
@@ -26,39 +21,32 @@ export class LoginService {
       observe: 'response'
      })
      .pipe(take(1))
-       .pipe( timeout(3000) )
-         .pipe(
-            tap( response => {
-              this.token = response.headers.get('Authorization');
-              console.log(this.token);
+        .pipe(
+            tap( 
+              response => {
+
+              window.sessionStorage.setItem('token', response.headers.get('Authorization'));
+              window.sessionStorage.setItem('user', user.username);
+              //console.log(this.token);
               return response;
+
             }));
   }
 
+  public getToken(): string {
+    return window.sessionStorage.getItem('token');
+  }
+
+  public getUsuarioLogado(): string {
+    return window.sessionStorage.getItem('user');
+  }
 
   public saveUser(user: User): Observable<any> {
 
-    if (!this.duranteTrs) {
-        this.duranteTrs = true;
-        return this.http.post(this.API_USERS, user,  {
-          observe: 'response'
-        })
-        .pipe(take(1))
-          .pipe( timeout(3000) )
-            .pipe(
-                tap( response => {
-                  this.duranteTrs = false;
-                  return response;
-                }, response => {
-                  this.duranteTrs = false;
-                  return response;
-                }));
-    }
-
-  }
-
-  public getToken(): string {
-    return this.token;
+    return this.http.post(this.API_USERS, user,  {
+      observe: 'response'
+    })
+      .pipe(take(1));
   }
 
 }

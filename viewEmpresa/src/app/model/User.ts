@@ -1,10 +1,9 @@
 export class User {
 
-    username: string;
+    username: string; //email do caboclo
     password: string;
-    enabled: boolean;
-    email: string;
-    dataCadastro = new Date();
+    enabled: boolean;    
+    dataCadastro: Date;
     confirm: string;
 
 }

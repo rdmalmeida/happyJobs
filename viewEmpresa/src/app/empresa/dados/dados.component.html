@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Dados Coorporativos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+        <form  #form (ngSubmit)="save(form, myBtn)" [formGroup]="validations_form">
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="ion-align-self-center"  size-md="6" size-lg="8" size-xs="12">
+                <div class="ion-text-center">
+                  <h3>Informações gerais:</h3>
+                </div>
+
+                <div class="ion-padding">
+
+                  <ion-card class="welcome-card">
+                    
+                    <ion-item>
+
+                      <ion-avatar class="avatar">
+                        <img [src]="previewUrl" (click)="file.click()" *ngIf="previewUrl"/>
+                        <img src="assets/prototipoImgs/minhaFoto.png" (click)="file.click()" *ngIf="!previewUrl"/>
+                      </ion-avatar>                      
+                      <input id='selecao-arquivo' type='file' (change)="fileProgress($event)" accept="image/*" #file>
+
+                    </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.nome.valid  && (validations_form.controls.nome.dirty || validations_form.controls.nome.touched) && submetido">
+                    <div style="color: red;">Preencha o nome da empresa.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Nome:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="nome" placeholder="Nome" name="nome" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.razaoSocial.valid  && (validations_form.controls.razaoSocial.dirty || validations_form.controls.razaoSocial.touched) && submetido">
+                    <div style="color: red;">Preencha a razão social.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Razão Social:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="razaoSocial" name="razaoSocial" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cnpj.valid  && (validations_form.controls.cnpj.dirty || validations_form.controls.cnpj.touched) && submetido">
+                    <div style="color: red;">Preencha o CNPJ.</div>
+                  </ion-item>                                              
+                  <ion-item *ngIf="!validations_form.controls.cnpj.valid && validations_form.get('cnpj').getError('cnpjNotValid') && submetido"> 
+                    <div style="color: red;">O CNPJ não é válido.</div>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>CNPJ:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="cnpj" type="text" placeholder="CNPJ" name="cnpj" maxLength="18" [brmasker]="{mask:'99.999.999/9999-99', len:18}" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.estruturaSocietaria.valid  && (validations_form.controls.estruturaSocietaria.dirty || validations_form.controls.estruturaSocietaria.touched) && submetido">
+                    <div style="color: red;">Preencha a estrutura societária.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Estrutura Societária:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Estrutura Societária" formControlName="estruturaSocietaria" name="estruturaSocietaria" doneText="Ok" cancelText="Cancelar" required>
+                      <ion-select-option value="ltda">Ltda.</ion-select-option>
+                      <ion-select-option value="sa">S.A.</ion-select-option>
+                      <ion-select-option value="ei">E.I.</ion-select-option>
+                      <ion-select-option value="eireli">eireli</ion-select-option>
+                      <ion-select-option value="me">me</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.descricao.valid  && (validations_form.controls.descricao.dirty || validations_form.controls.descricao.touched) && submetido">
+                    <div style="color: red;">Descreva objetivamente a empresa.</div>
+                  </ion-item>  
+                  <ion-item>
+                    <ion-label>Descrição:&nbsp;&nbsp;</ion-label>
+                    <ion-input type="text" formControlName="descricao" name="descricao"  placeholder="Descrição" maxLength="100" required></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Link do site:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="linkSite" type="text" placeholder="Link do site" name="linkSite" maxLength="100"></ion-input>
+                  </ion-item>
+                  
+                </ion-card> <br>
+
+                <ion-card class="welcome-card">
+
+                  <ion-item *ngIf="!validations_form.controls.logradouro.valid  && (validations_form.controls.logradouro.dirty || validations_form.controls.logradouro.touched) && submetido">
+                    <div style="color: red;">Preencha seu logradouro.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Logradouro:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="logradouro" type="text" placeholder="Logradouro" name="logradouro" maxLength="90" required></ion-input>
+                  </ion-item>
+                  
+                  <ion-item>
+                    <ion-label>Complemento:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="complemento" type="text" placeholder="Complemento" name="complemento" maxLength="90"></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.bairro.valid  && (validations_form.controls.bairro.dirty || validations_form.controls.bairro.touched) && submetido">
+                    <div style="color: red;">Preencha seu bairro</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Bairro:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="bairro" type="text" placeholder="Bairro" name="bairro" maxLength="50" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cidade.valid  && (validations_form.controls.cidade.dirty || validations_form.controls.cidade.touched) && submetido">
+                    <div style="color: red;">Preencha sua cidade.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Cidade:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="cidade" type="text" placeholder="Cidade" name="cidade" maxLength="50" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.uf.valid  && (validations_form.controls.uf.dirty || validations_form.controls.uf.touched) && submetido">
+                    <div style="color: red;">Preencha sua UF de origem.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>UF:&nbsp;&nbsp;</ion-label>
+                    <ion-select formControlName="uf" type="text" placeholder="Uf" name="uf" [interfaceOptions]="customPopoverOptions" interface="popover" required>
+                      <ion-select-option value="AC">Acre</ion-select-option>
+                      <ion-select-option value="AL">Alagoas</ion-select-option>
+                      <ion-select-option value="AP">Amapá</ion-select-option>
+                      <ion-select-option value="BA">Bahia</ion-select-option>
+                      <ion-select-option value="CE">Ceará</ion-select-option>
+                      <ion-select-option value="DF">Distrito Federal</ion-select-option>
+                      <ion-select-option value="GO">Goiás</ion-select-option>
+                      <ion-select-option value="MA">Maranhão</ion-select-option>
+                      <ion-select-option value="MG">Minas Gerais</ion-select-option>
+                      <ion-select-option value="MT">Mato Grosso</ion-select-option>
+                      <ion-select-option value="MS">Mato Grosso do Sul</ion-select-option>
+                      <ion-select-option value="PA">Pará</ion-select-option>
+                      <ion-select-option value="PB">Paraíba</ion-select-option>
+                      <ion-select-option value="PE">Pernambuco</ion-select-option>
+                      <ion-select-option value="PI">Piauí</ion-select-option>
+                      <ion-select-option value="PR">Paraná</ion-select-option>
+                      <ion-select-option value="RJ">Rio de Janeiro</ion-select-option>
+                      <ion-select-option value="RN">Rio Grande do Norte</ion-select-option>
+                      <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
+                      <ion-select-option value="RR">Rondônia</ion-select-option>
+                      <ion-select-option value="RO">Roraima</ion-select-option>
+                      <ion-select-option value="SC">Santa Catarina</ion-select-option>
+                      <ion-select-option value="SE">Sergipe</ion-select-option>
+                      <ion-select-option value="SP">São Paulo</ion-select-option>                      
+                      <ion-select-option value="TO">Tocantins</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.cep.valid  && (validations_form.controls.cep.dirty || validations_form.controls.cep.touched) && submetido">
+                    <div style="color: red;">Preencha o CEP corretamente.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Cep:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="cep" type="text" placeholder="Cep" name="cep" [brmasker]="{mask:'00.000-00', len:10}" required></ion-input>
+                  </ion-item>
+                  
+                </ion-card> <br>
+
+                <ion-card class="welcome-card">
+
+                  <ion-item>
+                    <ion-label>Telefone:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="telefone" type="text" placeholder="Telefone" name="telefone" maxLength="14" [brmasker]="{mask:'(99) 999999999', len:14}" required></ion-input>
+                  </ion-item>                                                                                                                       
+                  <ion-item>
+                    <ion-label>Nome do contato:&nbsp;&nbsp;</ion-label>
+                    <ion-input formControlName="nomeContato" type="text" placeholder="Nome do Contato" name="nomeContato" maxLength="90" required></ion-input>
+                  </ion-item>
+                  
+                  <ion-item *ngIf="!validations_form.controls.ramoNegocio.valid  && (validations_form.controls.ramoNegocio.dirty || validations_form.controls.ramoNegocio.touched) && submetido">
+                    <div style="color: red;">Preencha o ramo de negócio.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Ramo do negócio:&nbsp;&nbsp;</ion-label>
+                    <ion-select formControlName="ramoNegocio" type="text" placeholder="Ramo de negócio" name="ramoNegocio" [interfaceOptions]="customPopoverOptions" interface="popover" required>
+                      <ion-select-option value="xxx">...</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.qtdFuncionarios.valid  && (validations_form.controls.qtdFuncionarios.dirty || validations_form.controls.qtdFuncionarios.touched) && submetido">
+                    <div style="color: red;">Preencha a quantidade de funcionários.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Quantidade de funcionários:&nbsp;&nbsp;</ion-label>
+                    <ion-select formControlName="qtdFuncionarios" type="text" placeholder="Quantidade de funcionários" name="qtdFuncionarios" [interfaceOptions]="customPopoverOptions" interface="popover" required>
+                      <ion-select-option value="1">0 a 10</ion-select-option>
+                      <ion-select-option value="1">11 a 50</ion-select-option>
+                      <ion-select-option value="1">51 a 100</ion-select-option>
+                      <ion-select-option value="1">101 a 150</ion-select-option>
+                      <ion-select-option value="1">151 a 200</ion-select-option>
+                      <ion-select-option value="1">mais de 200</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                </ion-card> <br>
+                
+                  <div class="ion-text-center">
+                    <span>&nbsp;  </span>
+                    <ion-button type="submit" expand="block" #myBtn color="success">Salvar</ion-button>
+                  </div>                          
+                </div>
+              </ion-col>
+            </ion-row>
+        </ion-grid>           
+      </form>
+
+</ion-content>

@@ -1,3 +1,72 @@
-setar timeout padrao app rxjs
-generic handler for double submit 
+Construir um sistema Web (plataforma) para lincar profissionais à vagas
 
+Utilizar as melhores tecnologias e processos para um sistema Web. Como exemplo: Java/SpringBoot/JPA/Spring Security + IONIC (angular 8) + Git.
+
+
+Objetivo:
+
+Construir um sistema Web para facilitar às empresas a encontrar os candidatos mais adequados à posição. A recíproca também é verdadeira. Essa inteligência será realizada através de uso de APIs de terceiros.
+
+
+
+
+
+Permissas:
+
+Utilizar as melhores tecnologias e processos para um sistema Web. Como exemplo: Java/SpringBoot/JPA/Spring Security + IONIC (angular 8) + Git.
+
+Uma linguagem híbrida de modo a economizar no futuro, caso seja de interesse evoluir para um App.
+
+Código fonte disponibilizado no Github para o cliente ter a liberdade de escolher outro(s) desenvolvedor(es) para evoluir o sistema e/ou analisar a qualidade do código.
+
+
+
+FASE 1:
+
+Cadastros das entidades base do projeto. Dessa forma, teremos uma arquitetura robusta e uma versão estável do aplicativo para futuras evoluções.
+
+Segue um rascunho dos campos que serão criados:
+
+
+CANDIDATO
+Entra na plataforma usando e-mail e senha (criação login) e abre a tela “home no candidato”
+*home candidato (aqui o candidato terá opção de finalizar cadastro (colocando dados pessoais e currculo – currículo com leitura / preenchimento rápida com auxilio A.I) e fazer mapeamento comportamental (perfil)
+
+Tela msg de bem vinda
+
+Msg de privacidade: O currículo e dados dos candidatos ficarão visíveis apenas para empresas, não será possível ser consultado ou visto por outro candidato.
+
+Meu perfil: FOTO / Nome completo / Data de nascimento / um doc de identificação / Nacionalidade / Naturalidade / estado civil opção solteiro, casado, divorciado / gênero M F / possui filhos sim não / carteira de habilitação sim não / disponibilidade para mudar de cidade sim não / possui veículo próprio sim não / possui alguma deficiência sim não / pretensão salarial – opcional informar).
+Dados de contato -  espaço p dois contatos / endereço: rua, bairro, cidade, Estado,  cep e complemento - opcional/
+Social – link de face – linkedin – instagran (opcional)
+
+Meu currículo: (lido e preenchido com recursos da A.I) => Escolaridade: formação “predefinido e com opção de campo “outro”, nome da escola, nível, data mês de conclusão / experiência: empresa, cargo – opção de ser predefinido ou campo aberto, área de atuação “setores predefinidos e opção OUTROS”, mês – ano admissão e demissão, campo para descrever um pouco sobre as responsabilidade e funções executadas e observação em geral caso queira / cursos complementares.
+
+
+EMPRESA
+
+Dados cadastrais: cnpj / razão social ou nome individual / estrutura societária – ltda - sa - ei - eireli - mei.
+Opção para empresa preencher dados e colocar sua logomarca.
+Dados de contato: Telefone / Email corporativo / pessoa de contato
+Endereço: rua, bairro, cidade, Estado, Pais, complemento e cep opcional.
+
+
+Ramos de negócios: predefinido e opção “outros” abre espaço para informar
+Quantidade de funcionários: predefinido 0 a 10, 11 a 50, 51 a 100, 101 a 150, 151 a 200, mais de 200
+Breve descrição da empresa:
+
+FASE 2:
+
+Integração com gateway de pagamento e outra API parceiro.
+
+Opção para pagamentos e escolha de planos.
+Opção automática para bloqueio de acesso após plano expirado.
+Opção de reconhecimento de pagto e liberação automatica de acesso..Ou seja ter opções de impor restrições e permissões.
+Opções de relatórios gerenciais.
+
+Trabalhar os dados (resultados vindo da API terceiro)
+
+No geral a plataforma deve conter home candidato / home empresa / integração API / e filtros para melhor gerenciamento: vagas e candidatos por área de interesse , região / relatórios gerenciais etc...
+
+Att
+Tatiane

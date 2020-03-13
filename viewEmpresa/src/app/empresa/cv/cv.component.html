@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Currículo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+        <form  #form (ngSubmit)="save(form, myBtn)" [formGroup]="validations_form">
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="ion-align-self-center"  size-md="8" size-lg="12" size-xs="12">
+
+                <div class="ion-padding">
+
+                  <ion-card class="welcome-card">
+                    <ion-item lines="none">
+                      <ion-card-title>Perfil</ion-card-title>
+                      <br><br>
+                    </ion-item>
+                  
+                      <ion-item *ngIf="!validations_form.controls.titulo.valid  && (validations_form.controls.titulo.dirty || validations_form.controls.titulo.touched) && submetido">
+                        <div style="color: red;">.</div>
+                      </ion-item>                            
+                      <ion-item>
+                        <ion-label>Título:</ion-label>
+                        <ion-input formControlName="titulo" placeholder="Título" name="titulo" required></ion-input>
+                      </ion-item>
+
+                      <ion-item *ngIf="!validations_form.controls.resumo.valid  && (validations_form.controls.resumo.dirty || validations_form.controls.resumo.touched) && submetido">
+                        <div style="color: red;">Entre com um resumo de suas habilidades e experiências.</div>
+                      </ion-item>                            
+                      <ion-item>
+                        <ion-label position="floating">Entre com um resumo de suas habilidades e experiências.</ion-label>
+                        <ion-textarea rows="10" formControlName="resumo" placeholder="Resumo" name="resumo" required></ion-textarea>
+                      </ion-item>
+
+                </ion-card> <br>
+
+                <ion-card class="welcome-card">
+                  <ion-item lines="none">
+                    <ion-card-title>Formação</ion-card-title>
+                    <ion-icon name="ios-add-circle-outline" slot="end" (click)="addFormacao()"></ion-icon>
+                  </ion-item>
+                  <ion-item *ngFor="let formacao of candidato.cv.formacao">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          {{formacao.escola}}
+                        </ion-col>
+                        <ion-col>
+                          {{formacao.anoInicio}} a {{formacao.anoFim}}
+                        </ion-col>
+                        <ion-col>
+                          <input type="button" value="atualizar" (click)="atualizaFormacao(formacao)">
+                          <input type="button" value="excluir" (click)="removeFormacao(formacao)">
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                  
+                  <br>
+
+                </ion-card> <br>
+
+                <ion-card class="welcome-card">
+                  <ion-item lines="none">
+                    <ion-card-title>Experiência Profissional</ion-card-title>
+                    <ion-icon name="ios-add-circle-outline" slot="end" (click)="addXP()"></ion-icon>
+                  </ion-item>
+                  <ion-item *ngFor="let xpProf of candidato.cv.xpProf">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          {{xpProf.empresa}} - {{xpProf.titulo}}
+                        </ion-col>
+                        <ion-col>
+                          {{xpProf.mesInicio}}/{{xpProf.anoInicio}} a {{xpProf.mesFim}}/{{xpProf.anoFim}} 
+                        </ion-col>
+                        <ion-col>
+                          <input type="button" value="atualizar" (click)="atualizaXp(xpProf)">
+                          <input type="button" value="excluir" (click)="removeXp(xpProf)">
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+
+                  
+                  <br>
+                  
+                </ion-card> <br>
+
+                  <div class="ion-text-center">
+                    <span>&nbsp;  </span>
+                    <ion-button type="submit" expand="block" #myBtn >Salvar</ion-button>
+                  </div>                          
+                </div>
+              </ion-col>
+            </ion-row>
+        </ion-grid>           
+      </form>
+
+</ion-content>

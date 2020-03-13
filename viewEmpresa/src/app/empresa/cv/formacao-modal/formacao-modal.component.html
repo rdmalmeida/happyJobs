@@ -1,0 +1,98 @@
+
+<ion-content>
+
+  <ion-header translucent>
+    <ion-toolbar color="gray">
+      <ion-title>Formação</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">X</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+    <form  #form (ngSubmit)="save(form, myBtn)" [formGroup]="validations_form">
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-self-center" size-md="6" size-lg="12" size-xs="12">
+
+            <div class="ion-padding">
+
+              <ion-card class="welcome-card">
+                
+                  <ion-item *ngIf="!validations_form.controls.escola.valid  && (validations_form.controls.escola.dirty || validations_form.controls.escola.touched) && submetido">
+                    <div style="color: red;">Digite o nome da escola/universidade.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Escola:</ion-label>
+                    <ion-input formControlName="escola" placeholder="Escola"  name="escola" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.anoInicio.valid  && (validations_form.controls.anoInicio.dirty || validations_form.controls.anoInicio.touched) && submetido">
+                    <div style="color: red;">Entre com o ano de início do curso.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Ano de início:&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Ano de início" formControlName="anoInicio" name="anoInicio" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="inicioPopOverOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of anosInicio;" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.anoFim.valid  && (validations_form.controls.anoFim.dirty || validations_form.controls.anoFim.touched) && submetido">
+                    <div style="color: red;">Entre com o ano de fim do curso.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Ano conclusão (ou Previsão de conclusão):&nbsp;&nbsp;</ion-label>
+                    <ion-select placeholder="Conclusão" formControlName="anoFim" name="anoFim" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="fimPopOverOptions" interface="popover" required>
+                      <ion-select-option *ngFor="let item of anosFim;" value="{{item}}">{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.grau.valid  && (validations_form.controls.grau.dirty || validations_form.controls.grau.touched) && submetido">
+                    <div style="color: red;">Escolha o grau do curso.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Tipo de Curso:</ion-label>
+                    <ion-select formControlName="grau" placeholder="Grau do curso"  name="grau" doneText="Ok" cancelText="Cancelar" [interfaceOptions]="tipoDeCursoPopOverOptions" interface="popover" required>
+                        <ion-select-option value="Ensino fundamental">Ensino fundamental</ion-select-option>
+                        <ion-select-option value="Ensino médio">Ensino médio</ion-select-option>
+                        <ion-select-option value="Graduação">Graduação</ion-select-option>
+                        <ion-select-option value="Pós-Graduação">Pós-Graduação</ion-select-option>
+                        <ion-select-option value="MBA">MBA</ion-select-option>
+                        <ion-select-option value="Mestrado">Mestrado</ion-select-option>
+                        <ion-select-option value="Doutorado">Doutorado</ion-select-option>
+                        <ion-select-option value="Pós-Doutorado">Pós-Doutorado</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item *ngIf="!validations_form.controls.areaDeEstudo.valid  && (validations_form.controls.areaDeEstudo.dirty || validations_form.controls.areaDeEstudo.touched) && submetido">
+                    <div style="color: red;">Digite a área de estudo.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Área de Estudo:</ion-label>
+                    <ion-input formControlName="areaDeEstudo" placeholder="Área de estudo" name="areaDeEstudo" maxLength="90"></ion-input>
+                  </ion-item>
+
+                  
+                  <ion-item *ngIf="!validations_form.controls.descricao.valid  && (validations_form.controls.descricao.dirty || validations_form.controls.descricao.touched) && submetido">
+                    <div style="color: red;">Digite a descrição.</div>
+                  </ion-item>                            
+                  <ion-item>
+                    <ion-label>Descrição:</ion-label>
+                    <ion-input formControlName="descricao" placeholder="Descrição"  name="descricao" maxLength="90" required></ion-input>
+                  </ion-item>
+
+                  <br>
+                  <div class="ion-text-center">
+                    <span>&nbsp; </span>
+                    <ion-button type="submit" expand="block" #myBtn >Adicionar</ion-button>
+                  </div> 
+
+            </ion-card> <br>
+</div>
+</ion-col>
+</ion-row>
+</ion-grid>
+</form>
+</ion-content>

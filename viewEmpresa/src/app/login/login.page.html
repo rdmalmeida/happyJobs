@@ -16,17 +16,17 @@
                   </div>
                   <ion-card-content>    
                     <form (ngSubmit)="logar()" id="formularioLogin" #formularioLogin >           
-                        <ion-item>
+                     <ion-item>
                             <ion-label>&nbsp;Login&nbsp;:</ion-label>
-                            <ion-input type="text" [(ngModel)]="user.username" name="login" required></ion-input>
+                            <ion-input type="text" [(ngModel)]="user.username" name="username" required></ion-input>
                           </ion-item>
                           <ion-item>
                             <ion-label>Senha:</ion-label>
-                            <ion-input type="password" [(ngModel)]="user.password" name="senha" required></ion-input>
+                            <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
                           </ion-item>
                           <div class="ion-text-center">
-                            <span>&nbsp; {{errorMsg}} </span>
-                            <ion-button style="padding-top: 5px;" type="submit" expand="block" color="primary" >OK</ion-button>
+                            <span>&nbsp;  </span>
+                            <ion-button type="submit" expand="block" style="padding-top: 5px;" color="success">OK</ion-button>
                           </div>
                           <div class="ion-text-center">
                             <a >Esqueceu a senha?</a>
@@ -44,7 +44,7 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <form  (ngSubmit)="saveUser(myForm, myBtn)" #form="ngForm" [hidden]="!showRegisterForm" #myForm="ngForm">
+                  <form  #form [hidden]="!showRegisterForm" [formGroup]="validations_form" (submit)="saveUser(form, myBtn)">
                     <ion-grid>
                       <ion-row class="ion-justify-content-center">
                         <ion-col class="ion-align-self-center">
@@ -52,21 +52,34 @@
                             <h3>Minhas Informações:</h3>
                           </div>
                           <div class="ion-padding">
-                            <ion-item>
-                              <ion-input  [(ngModel)]="newUser.username" type="text" placeholder="Login" name="login" required></ion-input>
+                            
+                            <ion-item *ngIf="!validations_form.controls.username.valid  && (validations_form.controls.username.dirty || validations_form.controls.username.touched) && submetido">
+                              <div style="color: red;">Entre com um email válido.</div>
                             </ion-item>
                             <ion-item>
-                              <ion-input [(ngModel)]="newUser.email" type="email" placeholder="seu@email.com.br" name="email" required></ion-input>
+                              <ion-label>Email:</ion-label>
+                              <ion-input formControlName="username" placeholder="seu@email.com.br" name="email" maxLength="90" required></ion-input>  
+                            </ion-item>
+                            
+                            <ion-item *ngIf="!validations_form.controls.password.valid  && (validations_form.controls.password.dirty || validations_form.controls.password.touched) && submetido">
+                              <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
                             </ion-item>
                             <ion-item>
-                              <ion-input  [(ngModel)]="newUser.password" type="password" placeholder="Senha"  name="password" required></ion-input>
+                              <ion-label>Senha:</ion-label>
+                              <ion-input  formControlName="password" type="password" placeholder="Senha"  name="password" maxLength="50" required></ion-input>
                             </ion-item>
+                            
+                            <ion-item *ngIf="!validations_form.controls.confirm.valid  && (validations_form.controls.confirm.dirty || validations_form.controls.confirm.touched) && submetido">
+                              <div style="color: red;">A senha deve ter no mínimo oito dígitos, maiúsculas e minúsculas, números e caracteres especiais (!@#$¨%^&+=).</div>
+                            </ion-item>                            
                             <ion-item>
-                              <ion-input [(ngModel)]="newUser.confirm" type="password" placeholder="Senha novamente" name="confirm" required></ion-input>
+                              <ion-label>Confirma:</ion-label>
+                              <ion-input formControlName="confirm" type="password" placeholder="Senha novamente" name="confirm" maxLength="50" required></ion-input>
                             </ion-item>
+                            
                             <div class="ion-text-center">
-                              <span>&nbsp; {{errorMsg2}} </span>
-                              <ion-button type="submit" expand="block" #myBtn>Cadastro</ion-button>
+                              <span>&nbsp;  </span>
+                              <ion-button style="padding-top: 5px;" type="submit" expand="block" #myBtn color="success">Cadastro</ion-button>
                             </div>                          
                           </div>
                         </ion-col>
